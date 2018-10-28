@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Myucdquiz</string>
+    <string name="app_name">MyUCDquiz</string>
+    <string name="new_quiz">NEW QUIZ</string>
+    <string name="open">OPEN</string>
 </resources>
