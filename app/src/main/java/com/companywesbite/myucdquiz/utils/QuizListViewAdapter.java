@@ -30,7 +30,6 @@ public class QuizListViewAdapter extends ArrayAdapter<String> {
     static class ViewHolder {
         public TextView textview;
         public Button button;
-
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

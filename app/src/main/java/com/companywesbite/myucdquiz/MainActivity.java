@@ -1,6 +1,7 @@
 package com.companywesbite.myucdquiz;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.companywesbite.myucdquiz.utils.Constant;
+import com.companywesbite.myucdquiz.utils.DbManager;
+import com.companywesbite.myucdquiz.utils.MySqliteHelper;
 import com.companywesbite.myucdquiz.utils.QuizListViewAdapter;
-
 
 /*********
  * This is the class that displays the items with the numbers
@@ -21,19 +24,24 @@ import com.companywesbite.myucdquiz.utils.QuizListViewAdapter;
  * 
  */
 
-
-
-
-
-
 public class MainActivity extends AppCompatActivity {
-
+    private MySqliteHelper helper;
     Context context;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        helper = DbManager.getInstance(this);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Button bt = (Button) findViewById(R.id.addQuizButton);
+        bt.setOnClickListener(new View.OnClickListener(){
+             public void onClick(View v){
+                 SQLiteDatabase db = helper.getWritableDatabase();
+                 String sql1 = "insert into"+ Constant.TABLE_NAME +"valuse(1,'English','English Words',10)";
+                 DbManager.execSQL(db,sql1);
+                 String sql2 = "insert into"+ Constant.TABLE_NAME +"valuse(2,'History','History Problems',5)";
+                DbManager.execSQL(db,sql2);
+                db.close();
+             }});
         context=this;
         ListView lstview=(ListView)findViewById(R.id.quizList);
         lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -46,17 +54,9 @@ public class MainActivity extends AppCompatActivity {
         QuizListViewAdapter adapter=new QuizListViewAdapter(this,R.layout.quiz_item,R.id.quizName,items);
         // Bind data to the ListView
         lstview.setAdapter(adapter);
-
-
-
-
     }
-
     public void clickMe(View view){
         Button bt=(Button)view;
         Toast.makeText(this, "Button "+bt.getText().toString(),Toast.LENGTH_LONG).show();
     }
-
-
-
 }
