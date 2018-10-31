@@ -12,8 +12,9 @@ public class quiz {
     private String quizPictureFileName;
     private Map<Integer, question> questions; // We use a map so that we can allow fast access
     public int numberOfQuestions = 0;
+    private int grade = 0;
 
-    public quiz(int id, String name, String description, String quizPictureFileName, Map<Integer, question> questions)
+    public quiz(String name, String description, String quizPictureFileName, Map<Integer, question> questions)
     {
         this.id = id;
         this.name = name;
@@ -64,6 +65,22 @@ public class quiz {
     {
         this.numberOfQuestions--;
         this.questions.remove(id);
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public String getQuizPictureFileName() {
+        return quizPictureFileName;
+    }
+
+    public void setQuizPictureFileName(String quizPictureFileName) {
+        this.quizPictureFileName = quizPictureFileName;
     }
 
     public List<question> getQuestions() {

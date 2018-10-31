@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="5dp"
     >
 
     <TextView
@@ -13,14 +14,15 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:layout_marginRight="10dp"
+        android:textSize="30dp"
         />
 
     <ImageView
         android:id="@+id/quizImage"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="200dp"
         />
+
     <TextView
         android:id="@+id/quizDescription"
         android:layout_width="match_parent"
