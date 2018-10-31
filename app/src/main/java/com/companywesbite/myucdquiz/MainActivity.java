@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.questionClasses.quiz;
@@ -83,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
         QuizListViewAdapter adapter=new QuizListViewAdapter(this,R.layout.quiz_item,R.id.quizName,quizes);
         // Bind data to the ListView
+
         lstview.setAdapter(adapter);
+        lstview.setEmptyView((TextView)findViewById(R.id.emptyElement));
 
     }
 
