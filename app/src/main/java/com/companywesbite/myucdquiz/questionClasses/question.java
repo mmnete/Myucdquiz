@@ -7,7 +7,7 @@ public class question {
     private String title;
     private String description;
     private String answer;
-    private Integer answered;
+    private Integer answered; // Says whether the question has been answered correctly at least one time
     private Integer correct;
 
     public question(int id, String title, String description, String answer)
