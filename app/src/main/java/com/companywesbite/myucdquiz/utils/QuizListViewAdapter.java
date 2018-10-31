@@ -52,7 +52,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         // Set text to each TextView of ListView item
         ViewHolder holder = (ViewHolder) rowView.getTag();
         holder.textview.setText(item_list.get(position).getName());
-        // for now we just this as the image but later we will display the image the user chose.
+        // for now we just this as the image but later we will display the image the user chose
         holder.imageView.setImageResource(R.drawable.defaultquizimage);
         holder.button.setText("OPEN");
 
