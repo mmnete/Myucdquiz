@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         // Bind data to the ListView
 
         lstview.setAdapter(adapter);
-        lstview.setEmptyView((TextView)findViewById(R.id.emptyElement));
+       lstview.setEmptyView((TextView)findViewById(R.id.emptyElement));
 
     }
 
