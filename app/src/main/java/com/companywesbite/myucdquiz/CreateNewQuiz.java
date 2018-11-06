@@ -74,8 +74,6 @@ public class CreateNewQuiz extends AppCompatActivity {
 
     // This is for the back button
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(myIntent);
         finish();
         return true;
     }
@@ -165,8 +163,6 @@ public class CreateNewQuiz extends AppCompatActivity {
             DatabaseHelper db = new DatabaseHelper(this);
             db.createQuiz(newQuiz);
             Toast.makeText(this,"Quiz Created Successfully!",Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
             finish();
         }
     }

@@ -24,12 +24,18 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".CreateNewQuiz"
             android:screenOrientation="portrait" />
-        <activity android:name=".QuizDetailActivity" />
-        <activity android:name=".EditQuiz"></activity>
+        <activity android:name=".QuizDetailActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".EditQuiz"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>
