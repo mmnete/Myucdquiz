@@ -35,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"
-        android:onClick="clickMe"
         android:text="@string/open"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"

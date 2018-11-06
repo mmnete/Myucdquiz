@@ -1,12 +1,14 @@
 package com.companywesbite.myucdquiz.utils;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.companywesbite.myucdquiz.R;
@@ -36,7 +38,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         public ImageView imageView;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
 
         View rowView = convertView;
         // Inflate the list_item.xml file if convertView is null
@@ -53,8 +55,23 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         ViewHolder holder = (ViewHolder) rowView.getTag();
         holder.textview.setText(item_list.get(position).getName());
         // for now we just this as the image but later we will display the image the user chose
-        holder.imageView.setImageResource(R.drawable.defaultquizimage);
+        if(item_list.get(position).getQuizPictureFileName().equals("default"))
+        {
+            holder.imageView.setImageResource(R.drawable.defaultquizimage);
+        } else
+        {
+            holder.imageView.setImageBitmap(BitmapFactory.decodeFile(item_list.get(position).getQuizPictureFileName()));
+        }
+
+       // holder.imageView.setImageResource(R.drawable.defaultquizimage);
         holder.button.setText("OPEN");
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ListView) parent).performItemClick(v, position, 0);
+            }
+        });
+
 
         return rowView;
     }

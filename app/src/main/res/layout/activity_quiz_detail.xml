@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="2dp"
+    tools:context=".QuizDetailActivity">
+
+    <ImageView
+        android:id="@+id/quizImage"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        />
+
+    <TextView
+        android:text="Description"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/quizDescription"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textSize="15dp"
+        android:maxLines="4"
+        />
+
+    <TextView
+        android:id="@+id/numQuestions"
+        android:text="Questions"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+    <TextView
+        android:id="@+id/quizGrade"
+        android:text="Quiz Grade"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="50dp"
+        >
+
+        <Button
+            android:id="@+id/deleteQuiz"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:text="@string/x"
+            android:textSize="20dp"
+            android:textColor="#ffff"
+            android:background="#ff0000"/>
+
+        <Button
+            android:id="@+id/editQuiz"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:text="@string/fix"
+            android:textSize="20dp"
+            android:textColor="#ffff"
+            android:background="@android:color/holo_orange_dark"
+             />
+
+        <Button
+            android:id="@+id/takeQuiz"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:text="@string/startQuiz"
+            android:textSize="20dp"
+            android:textColor="#ffff"
+            android:background="@android:color/holo_green_dark"
+             />
+
+    </LinearLayout>
+
+
+</LinearLayout>

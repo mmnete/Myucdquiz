@@ -20,6 +20,16 @@ public class question {
         this.correct = 0;
     }
 
+    public question(String title, String description, String answer)
+    {
+        this.id = 10;
+        this.title = title;
+        this.description = description;
+        this.answer = answer;
+        this.answered = 0;
+        this.correct = 0;
+    }
+
     public int getId() {
         return id;
     }

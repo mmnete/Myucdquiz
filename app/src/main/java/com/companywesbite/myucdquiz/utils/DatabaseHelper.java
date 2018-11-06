@@ -119,7 +119,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         // insert row
-        long question_id = db.insert(TABLE_QUIZ, null, values);
+        long question_id = db.insert(TABLE_QUESTION, null, values);
 
         // Which quiz is the question assigned to
         createQuestionQuizRow(quiz_id, question_id);
@@ -170,6 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (c != null)
             c.moveToFirst();
+
 
 
         Integer questionId = c.getInt(c.getColumnIndex(KEY_ID));

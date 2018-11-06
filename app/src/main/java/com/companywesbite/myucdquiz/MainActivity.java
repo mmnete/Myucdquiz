@@ -1,15 +1,18 @@
 package com.companywesbite.myucdquiz;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button newQuizButton;
     private ListView lstview;
+    private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,31 +66,86 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        updateQuizListView();
+
     }
 
-    public void clickMe(View view){
-        Button bt=(Button)view;
-        Toast.makeText(this, "Button "+bt.getText().toString(),Toast.LENGTH_LONG).show();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // if the user does not allow us to read any images we cannot display anything
+        newQuizButton.setEnabled(false);
+        checkPermission();
+    }
+
+    // Ask for permission to read images unless close the application
+    private void checkPermission()
+    {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Permission is not granted
+            // Should we show an explanation?
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_GET_IMAGE);
+        }else
+        {
+            // we are good to go
+            newQuizButton.setEnabled(true);
+            updateQuizListView();
+        }
+    }
+
+    // Does the user allow us to check for images
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_GET_IMAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    newQuizButton.setEnabled(true);
+                    updateQuizListView();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
+
+
+    public void clickMe(long quizId){
+        Intent i = new Intent(this, QuizDetailActivity.class);
+        i.putExtra("quizId", quizId);
+        startActivity(i);
     }
 
     private void updateQuizListView()
     {
         DatabaseHelper db = new DatabaseHelper(this);
-        List<quiz> quizes = db.getAllQuizes();
+        final List<quiz> quizes = db.getAllQuizes();
 
-
-        lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Toast.makeText(context, "An item of the ListView is clicked.", Toast.LENGTH_LONG).show();
-            }
-        });
 
         QuizListViewAdapter adapter=new QuizListViewAdapter(this,R.layout.quiz_item,R.id.quizName,quizes);
         // Bind data to the ListView
 
         lstview.setAdapter(adapter);
        lstview.setEmptyView((TextView)findViewById(R.id.emptyElement));
+        lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                clickMe(quizes.get(position).getId());
+            }
+        });
 
     }
 
