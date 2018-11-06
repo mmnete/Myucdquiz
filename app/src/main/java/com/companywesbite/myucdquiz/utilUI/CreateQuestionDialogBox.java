@@ -11,16 +11,19 @@ import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.R;
 import com.companywesbite.myucdquiz.questionClasses.question;
+import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 
 public class CreateQuestionDialogBox {
 
     private long quizId;
+    private quiz thisQuiz;
     private Context context;
 
     public CreateQuestionDialogBox(long quizId, Context context)
     {
          this.quizId = quizId;
+
          this.context = context;
     }
 
@@ -94,6 +97,9 @@ public class CreateQuestionDialogBox {
         question question1 = new question(questionName,questionDescription,questionAnswer);
         DatabaseHelper db = new DatabaseHelper(this.context);
         question1.setId((int) db.createQuestion(question1, (int)quizId));
+        this.thisQuiz = db.getQuiz(quizId);
+        this.thisQuiz.addQuestion(question1);
+        db.updateQuiz(thisQuiz);
         Toast.makeText(this.context,"New Question Added",Toast.LENGTH_LONG).show();
         return true;
     }

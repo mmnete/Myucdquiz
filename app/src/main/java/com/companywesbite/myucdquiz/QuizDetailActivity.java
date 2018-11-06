@@ -98,6 +98,10 @@ public class QuizDetailActivity extends AppCompatActivity {
 
     private void makeDisplay()
     {
+        // now let us get our quiz
+        DatabaseHelper db = new DatabaseHelper(this);
+        thisQuiz = db.getQuiz((long)quizId);
+
         if(thisQuiz.getQuizPictureFileName().equals("default"))
         {
             quizImage.setImageResource(R.drawable.defaultquizimage);

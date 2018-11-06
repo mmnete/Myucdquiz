@@ -124,7 +124,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Which quiz is the question assigned to
         createQuestionQuizRow(quiz_id, question_id);
 
-
         return question_id;
     }
 
