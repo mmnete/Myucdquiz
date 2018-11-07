@@ -1,9 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SnapNotesFragment">
+    tools:context=".SnapNotesFragment"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/snapNotesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0711c4"
+        android:text="NEW SNAP"
+        android:layout_marginBottom="5dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/notesList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+        </ListView>
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/emptySnapList"
+            android:text="No Snap Notes Created"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/darker_gray"
+            android:textAlignment="center"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

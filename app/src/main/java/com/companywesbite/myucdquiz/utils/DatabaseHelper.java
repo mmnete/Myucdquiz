@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.companywesbite.myucdquiz.questionClasses.note;
 import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 
@@ -37,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_QUIZ = "TBquiz"; // This is a table containing all quizes
     private static final String TABLE_QUESTION = "TBquestion"; // This is a table for just questions
     private static final String TABLE_QUIZ_QUESTION = "TBquizquestion"; // How we know which quiz a question belongs to
+    private static final String TABLE_NOTE = "TBnotes"; // How we know which quiz a question belongs to
 
     // Common column names. This column is in all the three tables.
     private static final String KEY_ID = "id";
@@ -54,6 +56,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String QUESTION_ANSWER = "question_answer";
     private static final String QUESTION_ANSWERED = "question_answered";
     private static final String QUESTION_CORRECT = "question_correct";
+
+    // NOTES Table - column names
+    private static final String NOTE_NAME = "note_name";
+    private static final String NOTE_DESCRIPTION = "note_description";
 
     // TABLE_QUIZ_QUESTION Table - column names
     private static final String KEY_QUIZ_ID = "key_quiz_id";
@@ -79,6 +85,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + TABLE_QUIZ_QUESTION + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_QUIZ_ID + " INTEGER," + KEY_QUESTION_ID + " INTEGER)";
 
+    // note table create statement
+    private static final String CREATE_TABLE_NOTE = "CREATE TABLE "
+            + TABLE_NOTE + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
+            + NOTE_NAME + " TEXT," + NOTE_DESCRIPTION + " TEXT)";
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -90,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_QUIZ);
         db.execSQL(CREATE_TABLE_QUESTION);
         db.execSQL(CREATE_TABLE_TODO_TAG);
+        db.execSQL(CREATE_TABLE_NOTE);
     }
 
     @Override
@@ -98,6 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTION);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ_QUESTION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTE);
 
         // create new tables
         onCreate(db);
@@ -346,6 +359,91 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_QUIZ_QUESTION, KEY_QUIZ_ID + " = ?",
                 new String[] { String.valueOf(quiz_id) });
     }
+
+
+    /*
+     * Creating a Note
+     */
+    public long createNote(note note) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(NOTE_NAME, note.getTitle());
+        values.put(NOTE_DESCRIPTION, note.getNotes());
+
+
+        // insert row
+        long note_id = db.insert(TABLE_NOTE, null, values);
+
+
+        return note_id;
+    }
+
+    /*
+     * get single note
+     */
+    public note getNote(long note_id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTE + " WHERE "
+                + KEY_ID + " = " + note_id;
+
+        Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c != null)
+            c.moveToFirst();
+
+
+
+        Integer noteId = c.getInt(c.getColumnIndex(KEY_ID));
+        String noteName = c.getString(c.getColumnIndex(NOTE_NAME));
+        String noteDescription = c.getString(c.getColumnIndex(NOTE_DESCRIPTION));
+
+
+        // We need to create a map of questions here that are associated with this quiz....
+
+        note note = new note(noteId,noteName,noteDescription);
+        return note;
+    }
+
+    /*
+     * Deleting a note
+     */
+    public void deleteNote(long note_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NOTE, KEY_ID + " = ?",
+                new String[] { String.valueOf(note_id) });
+    }
+
+
+    /**
+     * Fetching all the saved notes
+     * */
+    public List<note> getAllNotes() {
+        List<note> notes = new ArrayList<note>();
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTE;
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                long noteId = c.getInt(c.getColumnIndex(KEY_ID));
+                notes.add(getNote(noteId));
+            } while (c.moveToNext());
+        }
+
+        return notes;
+    }
+
+
+
 
 
 }

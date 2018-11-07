@@ -3,6 +3,7 @@
     package="com.companywesbite.myucdquiz">
 
     <!-- this seems to be needed for the 'image chooser', which lets user choose an image from their gallery -->
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -24,18 +25,25 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CreateNewQuiz"
             android:screenOrientation="portrait" />
-        <activity android:name=".QuizDetailActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".EditQuiz"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".QuizDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditQuiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CameraActivity"
+            android:screenOrientation="portrait" />
 
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="ocr" />
+
+        <activity android:name=".noteCreator"></activity>
     </application>
 
 </manifest>
