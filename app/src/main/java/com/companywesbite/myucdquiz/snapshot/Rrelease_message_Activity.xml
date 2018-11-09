@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="httpschemas.android.comapkresandroid"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/text_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:id="@+id/text_release"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        />
+
+    <EditText
+        android:id="@+id/et_messsage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        />
+		
+	<android.support.v7.widget.RecyclerView
+        android:id="@+id/mRec"
+        android:dividerHeight="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+		/>
+
+</LinearLayout>
