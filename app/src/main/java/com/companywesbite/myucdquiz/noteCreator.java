@@ -70,6 +70,7 @@ public class noteCreator extends AppCompatActivity {
             return;
         }
         DatabaseHelper db = new DatabaseHelper(this);
+        noteString.replace("\n"," ");
         note note = new note(noteTitleString,noteString);
         db.createNote(note);
         finish();

@@ -3,8 +3,12 @@
     package="com.companywesbite.myucdquiz">
 
     <!-- this seems to be needed for the 'image chooser', which lets user choose an image from their gallery -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +47,16 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity android:name=".noteCreator"></activity>
+        <activity
+            android:name=".noteCreator"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NoteReaderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewQuestionsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".OngoingQuizActivity"></activity>
     </application>
 
 </manifest>

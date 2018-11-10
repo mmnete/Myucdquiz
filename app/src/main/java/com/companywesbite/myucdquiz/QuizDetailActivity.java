@@ -30,7 +30,7 @@ public class QuizDetailActivity extends AppCompatActivity {
     private ImageView quizImage;
     private TextView quizDescription;
     private TextView quizNumQuestions;
-    private TextView quizNumCorrectQuestions;
+
     private Button deleteQuiz;
     private Button changeQuiz;
     private Button startQuiz;
@@ -65,7 +65,7 @@ public class QuizDetailActivity extends AppCompatActivity {
          quizImage = (ImageView) findViewById(R.id.quizImage);
          quizDescription = (TextView) findViewById(R.id.quizDescription);
          quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
-         quizNumCorrectQuestions = (TextView) findViewById(R.id.quizGrade);
+
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
@@ -82,6 +82,15 @@ public class QuizDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 edit();
+            }
+        });
+
+        startQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), OngoingQuizActivity.class);
+                i.putExtra("quizId", quizId);
+                startActivity(i);
             }
         });
 
@@ -112,7 +121,6 @@ public class QuizDetailActivity extends AppCompatActivity {
 
         quizDescription.setText(thisQuiz.getDescription());
         quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.numberOfQuestions));
-        quizNumCorrectQuestions.setText("Quiz Grade: "+Integer.toString(thisQuiz.getGrade()));
     }
 
 

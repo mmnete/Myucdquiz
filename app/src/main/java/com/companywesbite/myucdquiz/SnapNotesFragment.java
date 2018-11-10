@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -70,11 +71,18 @@ public class SnapNotesFragment extends Fragment {
 
         lstview.setAdapter(adapter);
         lstview.setEmptyView((TextView) view.findViewById(R.id.emptySnapList));
+        lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                clickMe(notes.get(position).getId());
+            }
+        });
+
     }
 
-    public void clickMe(long quizId){
-        // when a user clicks a note...
-
+    public void clickMe(long noteId){
+        Intent i = new Intent(getContext(), NoteReaderActivity.class);
+        i.putExtra("noteId", noteId);
+        startActivity(i);
     }
 
 

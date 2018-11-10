@@ -200,6 +200,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return newQuestion;
     }
 
+
+
     /*
      * Updating a question
      */
@@ -329,6 +331,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return quizes;
     }
 
+
+
+
     /*
      * Updating a quiz
      */
@@ -408,6 +413,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         note note = new note(noteId,noteName,noteDescription);
         return note;
     }
+
+
+    /*
+     * Updating a note
+     */
+    public int updateNote(note note ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(NOTE_NAME, note.getTitle());
+        values.put(NOTE_DESCRIPTION, note.getNotes());
+
+
+
+        // updating row
+        return db.update(TABLE_NOTE, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(note.getId())});
+    }
+
 
     /*
      * Deleting a note

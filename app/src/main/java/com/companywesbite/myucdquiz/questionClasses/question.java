@@ -10,6 +10,8 @@ public class question {
     private Integer answered; // Says whether the question has been answered correctly at least one time
     private Integer correct;
 
+    public String currAnswer = "";
+
     public question(int id, String title, String description, String answer)
     {
         this.id = id;

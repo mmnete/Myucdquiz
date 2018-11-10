@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new QuizMainPageFragment(), "QUIZ MENU");
         adapter.addFragment(new SnapNotesFragment(), "SNAP-NOTES");
+        adapter.addFragment(new AskFragment(), "ASK QUESTIONS");
         viewPager.setAdapter(adapter);
     }
 

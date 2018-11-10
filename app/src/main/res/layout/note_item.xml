@@ -9,22 +9,38 @@
         android:id="@+id/noteName"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
+        android:textSize="20dp"
         />
 
     <Button
         android:id="@+id/deletNote"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
         android:text="X"
+        />
 
+    <Button
+        android:id="@+id/shareNote"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="M"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:background="@color/colorPrimary"
+        android:layout_margin="5dp"
         />
 
     <Button
         android:id="@+id/readNote"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:text="->"
+        android:textStyle="bold"
+        android:textColor="#ffff"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="5dp"
         />
 
 </LinearLayout>

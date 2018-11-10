@@ -86,11 +86,52 @@ public class EditQuiz extends AppCompatActivity {
              }
          });
 
+         changeQuizName.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 String newName = quizName.getText().toString().trim();
+                 if(newName.length() < 5)
+                 {
+                     Toast.makeText(getBaseContext(),"Quiz Name Too Short!",Toast.LENGTH_LONG).show();
+                     return;
+                 }
+                 thisQuiz.setName(newName);
+                 DatabaseHelper db = new DatabaseHelper(getBaseContext());
+                 db.updateQuiz(thisQuiz);
+                 Toast.makeText(getBaseContext(),"Change Made",Toast.LENGTH_LONG).show();
+             }
+         });
+
+         changeQuizDescription.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 String newDescription = quizDescription.getText().toString().trim();
+                 if(newDescription.length() < 10)
+                 {
+                     Toast.makeText(getBaseContext(),"Quiz Description Too Short!",Toast.LENGTH_LONG).show();
+                     return;
+                 }
+                 thisQuiz.setDescription(newDescription);
+                 DatabaseHelper db = new DatabaseHelper(getBaseContext());
+                 db.updateQuiz(thisQuiz);
+                 Toast.makeText(getBaseContext(),"Change Made",Toast.LENGTH_LONG).show();
+             }
+         });
+
          addQuestion.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  //Toast.makeText(getBaseContext(),"Hello",Toast.LENGTH_LONG).show();
                  createQuestion();
+             }
+         });
+
+         viewQuizQuestions.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent i = new Intent(getApplicationContext(), ViewQuestionsActivity.class);
+                 i.putExtra("quizId",(long)thisQuiz.getId());
+                 startActivity(i);
              }
          });
 
