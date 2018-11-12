@@ -32,7 +32,6 @@ public class AskFragment extends Fragment {
     private static final String TAG = "AskFragment";
 
 
-    Context context;
     private View view;
 
     private EditText searchBar;

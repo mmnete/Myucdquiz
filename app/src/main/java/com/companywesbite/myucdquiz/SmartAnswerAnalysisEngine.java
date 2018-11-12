@@ -12,7 +12,7 @@ package com.companywesbite.myucdquiz;
 public class SmartAnswerAnalysisEngine {
 
 
-    static double calcScore(String x, String y){
+    public static double calcScore(String x, String y){
         if (x.length()<y.length()){
             System.out.println("a");
             return 1 - (double) calcDistance(x, y)/y.length();

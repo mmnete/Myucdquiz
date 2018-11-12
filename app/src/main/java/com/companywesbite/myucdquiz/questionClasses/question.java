@@ -10,7 +10,7 @@ public class question {
     private Integer answered; // Says whether the question has been answered correctly at least one time
     private Integer correct;
 
-    public String currAnswer = "";
+    public double currScore = 0.0;
 
     public question(int id, String title, String description, String answer)
     {
@@ -78,5 +78,13 @@ public class question {
 
     public Integer getCorrect() {
         return correct;
+    }
+
+    public double getCurrScore() {
+        return currScore;
+    }
+
+    public void setCurrScore(double currScore) {
+        this.currScore = currScore;
     }
 }

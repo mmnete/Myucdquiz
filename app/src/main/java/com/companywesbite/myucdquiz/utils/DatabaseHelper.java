@@ -56,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String QUESTION_ANSWER = "question_answer";
     private static final String QUESTION_ANSWERED = "question_answered";
     private static final String QUESTION_CORRECT = "question_correct";
+    private static final String QUESTION_CURR_SCORE = "question_curr_score";
 
     // NOTES Table - column names
     private static final String NOTE_NAME = "note_name";
@@ -77,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_QUESTION = "CREATE TABLE " + TABLE_QUESTION
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + QUESTION_NAME
             + " TEXT," + QUESTION_DESCRIPTION + " TEXT," + QUESTION_ANSWER
-            + " TEXT," + QUESTION_ANSWERED + " BOOLEAN," + QUESTION_CORRECT
+            + " TEXT," + QUESTION_ANSWERED + " BOOLEAN," + QUESTION_CURR_SCORE + " DOUBLE," + QUESTION_CORRECT
             + " BOOLEAN" + ")";
 
     // todo_tag table create statement
@@ -129,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUESTION_ANSWER, question.getAnswer());
         values.put(QUESTION_ANSWERED, question.getAnswered());
         values.put(QUESTION_CORRECT, question.getCorrect());
-
+        values.put(QUESTION_CURR_SCORE, question.getCurrScore());
 
         // insert row
         long question_id = db.insert(TABLE_QUESTION, null, values);
@@ -191,10 +192,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String questionAnswer = c.getString(c.getColumnIndex(QUESTION_ANSWER));
         Integer questionAnswered = c.getInt(c.getColumnIndex(QUESTION_ANSWERED));
         Integer questionCorrect = c.getInt(c.getColumnIndex(QUESTION_CORRECT));
-
+        double questionCurrScore = c.getDouble(c.getColumnIndex(QUESTION_CURR_SCORE));
         // We need to create a map of questions here that are associated with this quiz....
 
         question newQuestion = new question(questionId,questionName,questionDescription,questionAnswer);
+        newQuestion.setCurrScore(questionCurrScore);
         newQuestion.setAnswered(questionAnswered);
         newQuestion.setCorrect(questionCorrect);
         return newQuestion;
@@ -214,6 +216,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUESTION_ANSWER, question.getAnswer());
         values.put(QUESTION_ANSWERED, question.getAnswered());
         values.put(QUESTION_CORRECT, question.getCorrect());
+        values.put(QUESTION_CURR_SCORE, question.getCurrScore());
 
         // updating row
         return db.update(TABLE_QUESTION, values, KEY_ID + " = ?",

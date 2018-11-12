@@ -4,18 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/questionTitle"
-        android:hint="Small summary of the question"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:maxLines="1"
-        android:layout_margin="5dp"
-        />
 
-    <EditText
+
+    <TextView
         android:id="@+id/questionDescription"
-        android:hint="Elaborate the question.."
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:maxLines="4"
@@ -33,20 +25,27 @@
         android:layout_margin="5dp"
         />
 
-    <Button
-        android:id="@+id/cancelCreation"
+    <TextView
+        android:id="@+id/currScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="CANCEL"/>
+        android:text="SHAKE PHONE TO SUBMIT"/>
 
-    <Button
-        android:id="@+id/createQuestion"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="ADD QUESTION"/>
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:text="SHAKE PHONE TO SUBMIT"/>
 
+    <Button
+        android:id="@+id/closeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="CLOSE"/>
 
 
 </LinearLayout>
