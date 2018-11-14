@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">MyUCDquiz</string>
-    <string name="new_quiz">NEW QUIZ</string>
+    <string name="app_name">Flashcards Pro</string>
+    <string name="new_quiz">New Flashcards Collection</string>
     <string name="open">OPEN</string>
     <string name="fix">FIX</string>
     <string name="x">X</string>
