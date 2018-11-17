@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
+        // Remove shadow from Action Bar
+        this.getSupportActionBar().setElevation(0);
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new QuizMainPageFragment(), "QUIZ MENU");
+        adapter.addFragment(new QuizMainPageFragment(), "Collections");
         adapter.addFragment(new SnapNotesFragment(), "SNAP-NOTES");
         adapter.addFragment(new AskFragment(), "ASK QUESTIONS");
         viewPager.setAdapter(adapter);
