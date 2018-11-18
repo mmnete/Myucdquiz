@@ -58,9 +58,6 @@ public class QuizDetailActivity extends AppCompatActivity {
         // set the top bar information
         // to display back button
         getSupportActionBar().setTitle(thisQuiz.getName());
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
 
          quizImage = (ImageView) findViewById(R.id.quizImage);
          quizDescription = (TextView) findViewById(R.id.quizDescription);

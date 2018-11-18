@@ -60,8 +60,6 @@ public class OngoingQuizActivity extends AppCompatActivity{
         // to display back button
 
         getSupportActionBar().setTitle(thisQuiz.getName() + " (ON-GOING)");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
 
 

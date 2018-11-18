@@ -42,8 +42,6 @@ public class NoteReaderActivity extends AppCompatActivity {
         noteTitle = currNote.getTitle();
 
         getSupportActionBar().setTitle(noteTitle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
         saveButton = (Button) findViewById(R.id.saveButton);
         textDisplayer = (EditText) findViewById(R.id.noteText);
