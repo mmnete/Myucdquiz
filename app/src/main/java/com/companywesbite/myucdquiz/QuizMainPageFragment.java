@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -29,7 +30,7 @@ public class QuizMainPageFragment extends Fragment {
 
     Context context;
 
-    private Button newQuizButton;
+    private FloatingActionButton newQuizButton;
     private ListView lstview;
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
     private View view;
@@ -45,7 +46,7 @@ public class QuizMainPageFragment extends Fragment {
         lstview=(ListView)view.findViewById(R.id.quizList);
 
         // creating a new quiz.
-        newQuizButton = (Button) view.findViewById(R.id.addQuizButton);
+        newQuizButton = (FloatingActionButton) view.findViewById(R.id.addQuizButton);
         newQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
