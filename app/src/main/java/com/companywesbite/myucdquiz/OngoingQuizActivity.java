@@ -33,8 +33,6 @@ public class OngoingQuizActivity extends AppCompatActivity{
     private ListView list;
     private ONGOINGQuestionListViewAdapter adapter;
     private List<question> questionList;
-    int textlength = 0;
-
     private NotificationManager mNotificationManager;
 
     @Override
