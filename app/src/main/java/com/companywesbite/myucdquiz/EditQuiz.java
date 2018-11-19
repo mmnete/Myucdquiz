@@ -65,6 +65,9 @@ public class EditQuiz extends AppCompatActivity {
         // set the top bar information
         // to display back button
         getSupportActionBar().setTitle("Edit Quiz");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
 
         // declare all the UI elements
          quizImage = (ImageView) findViewById(R.id.quizImage);

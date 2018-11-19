@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
+import com.companywesbite.myucdquiz.utilUI.CreateQuestionDialogBox;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import com.companywesbite.myucdquiz.utils.ONGOINGQuestionListViewAdapter;
 
@@ -40,15 +42,10 @@ public class QuizDetailActivity extends AppCompatActivity {
     private List<question> questions;
     private ONGOINGQuestionListViewAdapter adapter;
 
-
-
-
-
     private Button deleteQuiz;
     private Button changeQuiz;
     private Button startQuiz;
-
-
+    private FloatingActionButton addQuestion;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
 
@@ -75,7 +72,7 @@ public class QuizDetailActivity extends AppCompatActivity {
          quizImage = (ImageView) findViewById(R.id.quizImage);
          quizDescription = (TextView) findViewById(R.id.quizDescription);
          quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
-
+         addQuestion = (FloatingActionButton) findViewById(R.id.addQuestion);
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
@@ -98,6 +95,13 @@ public class QuizDetailActivity extends AppCompatActivity {
             }
         });
 
+        addQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createQuestion();
+            }
+        });
+
         startQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +112,19 @@ public class QuizDetailActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void createQuestion()
+    {
+        CreateQuestionDialogBox alert = new CreateQuestionDialogBox(thisQuiz.getId(), getApplicationContext());
+        alert.showDialog(this, "New Question");
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        // Update the quiz table
+        updateQuizTable();
     }
 
     @Override
@@ -121,7 +138,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         updateQuizTable();
     }
 
-    private void updateQuizTable(){
+    public void updateQuizTable(){
         DatabaseHelper db2 = new DatabaseHelper(this);
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();

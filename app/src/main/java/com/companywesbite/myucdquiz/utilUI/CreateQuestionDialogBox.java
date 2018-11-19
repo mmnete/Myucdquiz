@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.companywesbite.myucdquiz.QuizDetailActivity;
 import com.companywesbite.myucdquiz.R;
 import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
+import com.companywesbite.myucdquiz.utils.ONGOINGQuestionListViewAdapter;
 
 public class CreateQuestionDialogBox {
 
@@ -103,4 +106,5 @@ public class CreateQuestionDialogBox {
         Toast.makeText(this.context,"New Question Added",Toast.LENGTH_LONG).show();
         return true;
     }
+
 }
