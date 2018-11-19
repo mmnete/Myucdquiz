@@ -14,11 +14,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
+import com.companywesbite.myucdquiz.utils.ONGOINGQuestionListViewAdapter;
+
+import java.util.List;
 
 public class QuizDetailActivity extends AppCompatActivity {
 
@@ -30,6 +35,14 @@ public class QuizDetailActivity extends AppCompatActivity {
     private ImageView quizImage;
     private TextView quizDescription;
     private TextView quizNumQuestions;
+    private ListView list;
+    private List<question> questionList;
+    private List<question> questions;
+    private ONGOINGQuestionListViewAdapter adapter;
+
+
+
+
 
     private Button deleteQuiz;
     private Button changeQuiz;
@@ -66,6 +79,18 @@ public class QuizDetailActivity extends AppCompatActivity {
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
+
+        DatabaseHelper db2 = new DatabaseHelper(this);
+        thisQuiz = db2.getQuiz((long)quizId);
+        questions = thisQuiz.getQuestions();
+
+        // set the top bar information
+
+        getSupportActionBar().setTitle(thisQuiz.getName() + " (ON-GOING)");
+        list = (ListView) findViewById(R.id.listView);
+        questionList = thisQuiz.getQuestions();
+        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList);
+        list.setAdapter(adapter);
 
          // when the user wants to delete the quiz
         deleteQuiz.setOnClickListener(new View.OnClickListener() {

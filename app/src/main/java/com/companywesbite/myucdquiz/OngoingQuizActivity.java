@@ -40,40 +40,23 @@ public class OngoingQuizActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ongoing_quiz);
 
-
-
         // get the information about this quiz
         Intent i = getIntent();
 
         quizId = i.getLongExtra("quizId", 1000);
 
-
         // now let us get our quiz
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
-
         questions = thisQuiz.getQuestions();
 
-
-
         // set the top bar information
-        // to display back button
 
         getSupportActionBar().setTitle(thisQuiz.getName() + " (ON-GOING)");
-
-
-
-
         list = (ListView) findViewById(R.id.listView);
-
         questionList = thisQuiz.getQuestions();
-
-
-
         adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList);
         list.setAdapter(adapter);
-
-
     }
 
 
