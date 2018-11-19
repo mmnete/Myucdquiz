@@ -2,13 +2,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
+    android:background="#ffffff"
     >
 
     <TextView
         android:id="@+id/questionName"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:textSize="20dp"
         android:layout_margin="5dp"/>
 
@@ -16,7 +17,7 @@
         android:id="@+id/answerButton"
         android:text="A"
         android:textStyle="bold"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="30dp"
         android:textSize="15dp"
         android:layout_margin="5dp" />

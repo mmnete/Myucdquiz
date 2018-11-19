@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/activity_quiz_detail"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="2dp"
     tools:context=".QuizDetailActivity">
 
@@ -13,9 +13,11 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"
+        android:visibility="gone"
         />
 
     <TextView
+        android:id="@+id/descriptionTitle"
         android:text="Description"
         android:textSize="20dp"
         android:layout_width="match_parent"
@@ -25,10 +27,10 @@
     <TextView
         android:id="@+id/quizDescription"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:textSize="15dp"
+        android:layout_height="42dp"
         android:maxLines="4"
-        />
+        android:textSize="15dp"
+        android:layout_below="@id/descriptionTitle"/>
 
     <TextView
         android:id="@+id/numQuestions"
@@ -36,55 +38,56 @@
         android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/quizDescription"
         />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_height="wrap_content"
+
         android:id="@+id/listView"
-        android:divider="#694fea"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+        android:layout_below="@id/numQuestions"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
         android:layout_height="50dp"
-        >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/deleteQuiz"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ff0000"
             android:text="@string/x"
-            android:textSize="20dp"
             android:textColor="#ffff"
-            android:background="#ff0000"/>
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/editQuiz"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:text="@string/fix"
-            android:textSize="20dp"
-            android:textColor="#ffff"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@android:color/holo_orange_dark"
-             />
+            android:text="@string/fix"
+            android:textColor="#ffff"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/takeQuiz"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:text="@string/startQuiz"
-            android:textSize="20dp"
-            android:textColor="#ffff"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@android:color/holo_green_dark"
-             />
+            android:text="@string/startQuiz"
+            android:textColor="#ffff"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

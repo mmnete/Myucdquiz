@@ -2,7 +2,7 @@
     <string name="app_name">Flashcards Pro</string>
     <string name="new_quiz">New Flashcards Collection</string>
     <string name="open">Edit</string>
-    <string name="fix">Questions</string>
+    <string name="fix">Edit</string>
     <string name="x">Delete</string>
     <string name="startQuiz"><![CDATA[->]]></string>
 </resources>

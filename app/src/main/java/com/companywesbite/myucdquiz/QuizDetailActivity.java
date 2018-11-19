@@ -80,17 +80,8 @@ public class QuizDetailActivity extends AppCompatActivity {
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
 
-        DatabaseHelper db2 = new DatabaseHelper(this);
-        thisQuiz = db2.getQuiz((long)quizId);
-        questions = thisQuiz.getQuestions();
-
-        // set the top bar information
-
-        getSupportActionBar().setTitle(thisQuiz.getName() + " (ON-GOING)");
-        list = (ListView) findViewById(R.id.listView);
-        questionList = thisQuiz.getQuestions();
-        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList);
-        list.setAdapter(adapter);
+         //update the quiz table
+        updateQuizTable();
 
          // when the user wants to delete the quiz
         deleteQuiz.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +116,20 @@ public class QuizDetailActivity extends AppCompatActivity {
 
         // start the display here...
         checkPermission();
+
+        // Update the quiz table
+        updateQuizTable();
+    }
+
+    private void updateQuizTable(){
+        DatabaseHelper db2 = new DatabaseHelper(this);
+        thisQuiz = db2.getQuiz((long)quizId);
+        questions = thisQuiz.getQuestions();
+
+        list = (ListView) findViewById(R.id.listView);
+        questionList = thisQuiz.getQuestions();
+        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList);
+        list.setAdapter(adapter);
     }
 
     private void makeDisplay()
