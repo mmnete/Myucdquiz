@@ -46,6 +46,7 @@ public class QuizDetailActivity extends AppCompatActivity {
     private Button changeQuiz;
     private Button startQuiz;
     private FloatingActionButton addQuestion;
+    private FloatingActionButton editQuiz;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
 
@@ -73,6 +74,7 @@ public class QuizDetailActivity extends AppCompatActivity {
          quizDescription = (TextView) findViewById(R.id.quizDescription);
          quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
          addQuestion = (FloatingActionButton) findViewById(R.id.addQuestion);
+         editQuiz = (FloatingActionButton) findViewById(R.id.editQuizFloatingButton);
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
@@ -88,7 +90,7 @@ public class QuizDetailActivity extends AppCompatActivity {
             }
         });
 
-        changeQuiz.setOnClickListener(new View.OnClickListener() {
+        editQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 edit();

@@ -42,13 +42,13 @@
         />
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-
         android:id="@+id/listView"
-        android:dividerHeight="1dp"
-        android:layout_below="@id/numQuestions"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/numQuestions"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:dividerHeight="1dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addQuestion"
@@ -63,11 +63,25 @@
         app:backgroundTint="@android:color/holo_green_dark"
         app:rippleColor="@android:color/darker_gray" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/editQuizFloatingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/addQuestion"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/ic_edit_white_24dp"
+        app:backgroundTint="@android:color/holo_orange_dark"
+        app:rippleColor="@android:color/darker_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <Button
