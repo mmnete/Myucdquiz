@@ -7,36 +7,34 @@
 
     <EditText
         android:id="@+id/questionDescription"
-        android:hint="Elaborate the question.."
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:maxLines="4"
-        android:scrollbars="vertical"
         android:layout_margin="5dp"
-        />
+        android:hint="Edit question"
+        android:maxLines="4"
+        android:scrollbars="vertical" />
 
     <EditText
         android:id="@+id/questionAnswer"
-        android:hint="Elaborate the answer.."
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:maxLines="4"
-        android:scrollbars="vertical"
         android:layout_margin="5dp"
-        />
+        android:hint="Edit answer"
+        android:maxLines="4"
+        android:scrollbars="vertical" />
 
     <Button
         android:id="@+id/cancelCreation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="CANCEL"/>
+        android:text="CANCEL" />
 
     <Button
         android:id="@+id/saveChanges"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="SAVE CHANGES"/>
+        android:text="SAVE CHANGES" />
 
 </LinearLayout>
