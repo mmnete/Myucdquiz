@@ -28,6 +28,20 @@
         android:text="ADD NOTE"
         android:layout_marginTop="5dp"
         android:id="@+id/addButton"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PREVIEW"
+        android:textAlignment="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/notePreview"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:textSize="20dp"/>
 
 
 </LinearLayout>

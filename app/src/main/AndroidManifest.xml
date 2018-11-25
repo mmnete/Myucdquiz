@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -56,7 +55,8 @@
         <activity
             android:name=".ViewQuestionsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".OngoingQuizActivity"></activity>
+        <activity android:name=".OngoingQuizActivity" />
+        <activity android:name=".QuestionImageViewer"></activity>
     </application>
 
 </manifest>

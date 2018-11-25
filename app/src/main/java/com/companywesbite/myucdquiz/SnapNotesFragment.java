@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,8 +22,7 @@ import java.util.List;
 public class SnapNotesFragment extends Fragment {
     private static final String TAG = "SnapNotesFragment";
 
-
-    private Button newSnapButton;
+    private FloatingActionButton newQuizButton;
     private ListView lstview;
     private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 1000;
 
@@ -42,8 +41,8 @@ public class SnapNotesFragment extends Fragment {
         lstview=(ListView)view.findViewById(R.id.notesList);
 
         // creating a new quiz.
-        newSnapButton = (Button) view.findViewById(R.id.snapNotesButton);
-        newSnapButton.setOnClickListener(new View.OnClickListener() {
+        newQuizButton = (FloatingActionButton) view.findViewById(R.id.addSnapNote);
+        newQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadCamera();

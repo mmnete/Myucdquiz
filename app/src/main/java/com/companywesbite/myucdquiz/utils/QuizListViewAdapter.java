@@ -1,7 +1,6 @@
 package com.companywesbite.myucdquiz.utils;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,13 +54,14 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         ViewHolder holder = (ViewHolder) rowView.getTag();
         holder.textview.setText(item_list.get(position).getName());
         // for now we just this as the image but later we will display the image the user chose
-        if(item_list.get(position).getQuizPictureFileName().equals("default"))
+      /*  if(item_list.get(position).getQuizPictureFileName().equals("default"))
         {
             holder.imageView.setImageResource(R.drawable.defaultquizimage);
         } else
         {
             holder.imageView.setImageBitmap(BitmapFactory.decodeFile(item_list.get(position).getQuizPictureFileName()));
         }
+        */
 
        // holder.imageView.setImageResource(R.drawable.defaultquizimage);
         holder.button.setText("OPEN");

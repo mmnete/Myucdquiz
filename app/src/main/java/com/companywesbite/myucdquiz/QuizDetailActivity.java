@@ -1,15 +1,15 @@
 package com.companywesbite.myucdquiz;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,8 +47,14 @@ public class QuizDetailActivity extends AppCompatActivity {
     private Button startQuiz;
     private FloatingActionButton addQuestion;
     private FloatingActionButton editQuiz;
+    private FloatingActionButton deleteButton;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
+    private static final int RESULT_LOAD_IMAGE = 1;
+
+    private CreateQuestionDialogBox alert;
+
+    private boolean deleted = false;
 
 
     @Override
@@ -61,20 +67,25 @@ public class QuizDetailActivity extends AppCompatActivity {
 
         quizId = i.getLongExtra("quizId", 1000);
 
+       // Log.d("TAG","Recieved"+)
 
         // now let us get our quiz
         DatabaseHelper db = new DatabaseHelper(this);
-        thisQuiz = db.getQuiz((long)quizId);
+        thisQuiz = db.getQuiz(quizId);
 
         // set the top bar information
         // to display back button
         getSupportActionBar().setTitle(thisQuiz.getName());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-         quizImage = (ImageView) findViewById(R.id.quizImage);
+
+        quizImage = (ImageView) findViewById(R.id.quizImage);
          quizDescription = (TextView) findViewById(R.id.quizDescription);
          quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
          addQuestion = (FloatingActionButton) findViewById(R.id.addQuestion);
          editQuiz = (FloatingActionButton) findViewById(R.id.editQuizFloatingButton);
+         deleteButton = (FloatingActionButton) findViewById(R.id.deleteQuizButton);
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
@@ -113,20 +124,30 @@ public class QuizDetailActivity extends AppCompatActivity {
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete();
+            }
+        });
+
 
     }
 
     private void createQuestion()
     {
-        CreateQuestionDialogBox alert = new CreateQuestionDialogBox(thisQuiz.getId(), getApplicationContext());
+        alert = new CreateQuestionDialogBox(thisQuiz.getId(), getApplicationContext());
         alert.showDialog(this, "New Question");
-
     }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
         // Update the quiz table
-        updateQuizTable();
+        if(!deleted)
+        {
+            updateQuizTable();
+        }
     }
 
     @Override
@@ -157,13 +178,6 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
 
-        if(thisQuiz.getQuizPictureFileName().equals("default"))
-        {
-            quizImage.setImageResource(R.drawable.defaultquizimage);
-        } else
-        {
-            quizImage.setImageBitmap(BitmapFactory.decodeFile(thisQuiz.getQuizPictureFileName()));
-        }
 
         quizDescription.setText(thisQuiz.getDescription());
         quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.numberOfQuestions));
@@ -226,38 +240,35 @@ public class QuizDetailActivity extends AppCompatActivity {
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //  super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            //quizImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            this.alert.questionImage = picturePath;
+            this.alert.addImage.setText("IMAGE SELECTED!");
+
+        }
+    }
 
     // deleting this quiz
     private void delete()
     {
-
-        AlertDialog alertDialog =
-        new AlertDialog.Builder(this)
-                // Set Dialog Title
-                .setTitle("ALERT!")
-                // Set Dialog Message
-                .setMessage("Alert are you sure you want to delete this quiz?")
-
-                // Positive button
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do something else
-                        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-                        db.deleteQuiz(thisQuiz.getId());
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-                })
-
-                // Negative Button
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do something else
-                        Toast.makeText(getApplicationContext(),"Good Choice, keep trying dont stop :-)",Toast.LENGTH_LONG).show();
-                    }
-                }).create();
-        alertDialog.show();
+        deleted = true;
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        db.deleteQuiz(thisQuiz.getId());
+        Toast.makeText(getApplicationContext(),"Quiz Deleted!",Toast.LENGTH_LONG).show();
+        finish();
     }
 
     // edit this quiz

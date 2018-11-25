@@ -2,6 +2,7 @@ package com.companywesbite.myucdquiz.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
     LayoutInflater inflater;
     private List<question> arraylist;
     Activity activity;
+    private  AnswerQuestionDialogBox dialogBox;
 
     public ONGOINGQuestionListViewAdapter(Context context,Activity activity, List<question> arraylist) {
         mContext = context;
@@ -61,6 +63,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
             holder.name = (TextView) view.findViewById(R.id.questionName);
             holder.answerButton = (Button) view.findViewById(R.id.answerButton);
             holder.score = (TextView) view.findViewById(R.id.questionScore);
+
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -72,11 +75,10 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         holder.answerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnswerQuestionDialogBox dialogBox = new AnswerQuestionDialogBox(arraylist.get(position),mContext);
-                dialogBox.showDialog(activity);
+              dialogBox = new AnswerQuestionDialogBox(arraylist.get(position),arraylist,position,mContext);
+              dialogBox.showDialog(activity);
             }
         });
-
 
         return view;
     }

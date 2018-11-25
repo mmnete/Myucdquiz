@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.questionClasses.note;
@@ -17,6 +18,7 @@ public class noteCreator extends AppCompatActivity {
     private EditText noteTitle;
     private Button cancelButton;
     private Button addButton;
+    private TextView preview;
 
     private String noteString;
 
@@ -37,6 +39,11 @@ public class noteCreator extends AppCompatActivity {
         noteTitle = findViewById(R.id.noteTitle);
         cancelButton = findViewById(R.id.cancelButton);
         addButton = findViewById(R.id.addButton);
+        preview = findViewById(R.id.notePreview);
+
+        noteString = enhancer(noteString);
+
+        preview.setText(noteString);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +58,8 @@ public class noteCreator extends AppCompatActivity {
                 creatNewNote();
             }
         });
-
-
-
     }
+
 
     private void creatNewNote()
     {
@@ -75,4 +80,17 @@ public class noteCreator extends AppCompatActivity {
         db.createNote(note);
         finish();
     }
+
+    private String enhancer(String s)
+    {
+        String output = "";
+        String [] changed = s.split(" ");
+        for(int i = 0; i <changed.length;i++)
+        {
+            output += changed[i] + " ";
+        }
+        output.replace("\n", "").replace("\r", "");
+        return output;
+    }
+
 }

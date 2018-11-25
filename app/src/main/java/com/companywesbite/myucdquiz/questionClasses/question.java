@@ -3,16 +3,17 @@ package com.companywesbite.myucdquiz.questionClasses;
 public class question {
 
     // What defines a question
-    private int id; // every question is unique.
+    private long id; // every question is unique.
     private String title;
     private String description;
     private String answer;
     private Integer answered; // Says whether the question has been answered correctly at least one time
     private Integer correct;
+    private String picturePath;
 
     public double currScore = 0.0;
 
-    public question(int id, String title, String description, String answer)
+    public question(long id, String title, String description, String answer, String picturePath)
     {
         this.id = id;
         this.title = title;
@@ -20,9 +21,10 @@ public class question {
         this.answer = answer;
         this.answered = 0;
         this.correct = 0;
+        this.picturePath = picturePath;
     }
 
-    public question(String title, String description, String answer)
+    public question(String title, String description, String answer, String picturePath)
     {
         this.id = 10;
         this.title = title;
@@ -30,13 +32,14 @@ public class question {
         this.answer = answer;
         this.answered = 0;
         this.correct = 0;
+        this.picturePath = picturePath;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -86,5 +89,13 @@ public class question {
 
     public void setCurrScore(double currScore) {
         this.currScore = currScore;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 }

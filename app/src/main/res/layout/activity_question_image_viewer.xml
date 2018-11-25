@@ -4,19 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoteReaderActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".QuestionImageViewer">
 
 
-    <TextView
-        android:id="@+id/noteText"
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:id="@+id/questionImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:verticalScrollbarPosition="right"
-        android:textSize="20dp"
-        />
+        android:layout_weight="1" />
+
 
 
 </LinearLayout>

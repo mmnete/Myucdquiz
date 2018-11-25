@@ -3,6 +3,7 @@ package com.companywesbite.myucdquiz.utilUI;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -13,11 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.companywesbite.myucdquiz.QuestionImageViewer;
 import com.companywesbite.myucdquiz.R;
 import com.companywesbite.myucdquiz.SmartAnswerAnalysisEngine;
 import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import com.companywesbite.myucdquiz.utils.ShakeListener;
+
+import java.util.List;
 
 
 public class AnswerQuestionDialogBox {
@@ -25,18 +29,24 @@ public class AnswerQuestionDialogBox {
     private long questionId;
     private question thisQuestion;
     private Context context;
+    private int pos;
+    private List<question> col;
 
     private ShakeListener mShaker;
+    private boolean displaying = false;
 
 
-    public AnswerQuestionDialogBox(question question, Context context)
+    public AnswerQuestionDialogBox(question question, List<question> col, int pos, Context context)
     {
         this.thisQuestion = question;
         this.questionId = question.getId();
         this.context = context;
+        this.pos = pos;
+        this.col = col;
     }
 
     public void showDialog(Activity activity){
+        displaying = true;
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -46,8 +56,27 @@ public class AnswerQuestionDialogBox {
         final TextView questionDescription = (TextView) dialog.findViewById(R.id.questionDescription);
         final EditText questionAnswer = (EditText) dialog.findViewById(R.id.questionAnswer);
         final Button closeButton = (Button) dialog.findViewById(R.id.closeButton);
+        final Button nextButton = (Button) dialog.findViewById(R.id.nextButton);
+        final Button prevButton = (Button) dialog.findViewById(R.id.prevButton);
+        final Button imageButton = (Button) dialog.findViewById(R.id.imageButton);
         final TextView currScore = (TextView) dialog.findViewById(R.id.currScore);
 
+
+        imageButton.setEnabled(false);
+        if(!thisQuestion.getPicturePath().equals("default"))
+        {
+            imageButton.setText("VIEW IMAGE");
+            imageButton.setEnabled(true);
+        }
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, QuestionImageViewer.class);
+                i.putExtra("questionId", thisQuestion.getId());
+                context.startActivity(i);
+            }
+        });
 
         questionDescription.setText(thisQuestion.getDescription());
         currScore.setText(""+thisQuestion.getCurrScore());
@@ -55,7 +84,36 @@ public class AnswerQuestionDialogBox {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                close();
                 dialog.cancel();
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos = pos + 1;
+                if(pos == col.size())
+                {
+                    pos--;
+                }
+                thisQuestion = col.get(pos);
+                questionDescription.setText(thisQuestion.getDescription());
+                currScore.setText(""+thisQuestion.getCurrScore());
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos = pos - 1;
+                if(pos == -1)
+                {
+                    pos++;
+                }
+                thisQuestion = col.get(pos);
+                questionDescription.setText(thisQuestion.getDescription());
+                currScore.setText(""+thisQuestion.getCurrScore());
             }
         });
 
@@ -63,6 +121,11 @@ public class AnswerQuestionDialogBox {
         mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
             public void onShake()
             {
+
+                if(!displaying)
+                {
+                    return;
+                }
 
                String userAnswer =  questionAnswer.getText().toString().trim();
 
@@ -88,12 +151,17 @@ public class AnswerQuestionDialogBox {
                 thisQuestion.setCurrScore(score*100);
                 DatabaseHelper db = new DatabaseHelper(context);
                 db.updateQuestion(thisQuestion);
-                currScore.setText(score*100+"");
+                currScore.setText(100+"");
             }
         });
 
 
         dialog.show();
+    }
+
+    public void close()
+    {
+        displaying = false;
     }
 
 

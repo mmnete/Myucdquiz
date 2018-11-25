@@ -10,11 +10,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -115,6 +115,7 @@ public class QuizMainPageFragment extends Fragment {
 
 
 
+
     public void clickMe(long quizId){
         Intent i = new Intent(getContext(), QuizDetailActivity.class);
         i.putExtra("quizId", quizId);
@@ -134,6 +135,7 @@ public class QuizMainPageFragment extends Fragment {
         lstview.setEmptyView((TextView) view.findViewById(R.id.emptyElement));
         lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Log.d("TAG",Integer.toString((int)quizes.get(position).getId()));
                 clickMe(quizes.get(position).getId());
             }
         });

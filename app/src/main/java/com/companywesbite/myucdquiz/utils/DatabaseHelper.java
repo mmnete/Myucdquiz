@@ -57,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String QUESTION_ANSWERED = "question_answered";
     private static final String QUESTION_CORRECT = "question_correct";
     private static final String QUESTION_CURR_SCORE = "question_curr_score";
+    private static final String QUESTION_IMAGE_DIRECTORY = "question_image_directory";
 
     // NOTES Table - column names
     private static final String NOTE_NAME = "note_name";
@@ -70,8 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Todo table create statement
     private static final String CREATE_TABLE_QUIZ = "CREATE TABLE "
             + TABLE_QUIZ + "(" + KEY_ID + " INTEGER PRIMARY KEY," + QUIZ_NAME
-            + " TEXT," + QUIZ_DESCRIPTION + " TEXT," + QUIZ_IMAGE_DIRECTORY
-            + " TEXT," + QUIZ_NUM_OF_QUES + " INTEGER," + QUIZ_GRADE
+            + " TEXT," + QUIZ_DESCRIPTION + " TEXT," + QUIZ_NUM_OF_QUES + " INTEGER," + QUIZ_GRADE
             + " INTEGER" + ")";
 
     // Tag table create statement
@@ -79,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + QUESTION_NAME
             + " TEXT," + QUESTION_DESCRIPTION + " TEXT," + QUESTION_ANSWER
             + " TEXT," + QUESTION_ANSWERED + " BOOLEAN," + QUESTION_CURR_SCORE + " DOUBLE," + QUESTION_CORRECT
-            + " BOOLEAN" + ")";
+            + " BOOLEAN," + QUESTION_IMAGE_DIRECTORY + " TEXT"  + ")";
 
     // todo_tag table create statement
     private static final String CREATE_TABLE_TODO_TAG = "CREATE TABLE "
@@ -120,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*
      * Creating a question
      */
-    public long createQuestion(question question, Integer quiz_id) {
+    public long createQuestion(question question, long quiz_id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -131,7 +131,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUESTION_ANSWERED, question.getAnswered());
         values.put(QUESTION_CORRECT, question.getCorrect());
         values.put(QUESTION_CURR_SCORE, question.getCurrScore());
+        values.put(QUESTION_IMAGE_DIRECTORY, question.getPicturePath());
 
+        Log.d("TAG","Added to database "+question.getPicturePath());
         // insert row
         long question_id = db.insert(TABLE_QUESTION, null, values);
 
@@ -186,16 +188,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-        Integer questionId = c.getInt(c.getColumnIndex(KEY_ID));
+        long questionId = c.getLong(c.getColumnIndex(KEY_ID));
         String questionName = c.getString(c.getColumnIndex(QUESTION_NAME));
         String questionDescription = c.getString(c.getColumnIndex(QUESTION_DESCRIPTION));
         String questionAnswer = c.getString(c.getColumnIndex(QUESTION_ANSWER));
         Integer questionAnswered = c.getInt(c.getColumnIndex(QUESTION_ANSWERED));
         Integer questionCorrect = c.getInt(c.getColumnIndex(QUESTION_CORRECT));
         double questionCurrScore = c.getDouble(c.getColumnIndex(QUESTION_CURR_SCORE));
+        String questionPicture = c.getString(c.getColumnIndex(QUESTION_IMAGE_DIRECTORY));
         // We need to create a map of questions here that are associated with this quiz....
 
-        question newQuestion = new question(questionId,questionName,questionDescription,questionAnswer);
+        question newQuestion = new question(questionId,questionName,questionDescription,questionAnswer,questionPicture);
         newQuestion.setCurrScore(questionCurrScore);
         newQuestion.setAnswered(questionAnswered);
         newQuestion.setCorrect(questionCorrect);
@@ -217,6 +220,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUESTION_ANSWERED, question.getAnswered());
         values.put(QUESTION_CORRECT, question.getCorrect());
         values.put(QUESTION_CURR_SCORE, question.getCurrScore());
+        values.put(QUESTION_IMAGE_DIRECTORY, question.getPicturePath());
 
         // updating row
         return db.update(TABLE_QUESTION, values, KEY_ID + " = ?",
@@ -246,7 +250,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUIZ_DESCRIPTION, quiz.getDescription());
         values.put(QUIZ_NUM_OF_QUES, quiz.numberOfQuestions);
         values.put(QUIZ_GRADE, quiz.getGrade());
-        values.put(QUIZ_IMAGE_DIRECTORY, quiz.getQuizPictureFileName());
 
 
         // insert row
@@ -260,6 +263,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * get single quiz
      */
     public quiz getQuiz(long quiz_id) {
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         String selectQuery = "SELECT  * FROM " + TABLE_QUIZ + " WHERE "
@@ -273,12 +277,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             c.moveToFirst();
 
 
-        Integer quizId = c.getInt(c.getColumnIndex(KEY_ID));
+        long quizId = (long) c.getInt(c.getColumnIndex(KEY_ID));
         String quizName = c.getString(c.getColumnIndex(QUIZ_NAME));
         String quizDescription = c.getString(c.getColumnIndex(QUIZ_DESCRIPTION));
         Integer quizNumOfQues = c.getInt(c.getColumnIndex(QUIZ_NUM_OF_QUES));
         Integer quizGrade = c.getInt(c.getColumnIndex(QUIZ_GRADE));
-        String quizImage = c.getString(c.getColumnIndex(QUIZ_IMAGE_DIRECTORY));
 
 
         // now we just need to get the list of questions in this quiz
@@ -291,19 +294,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // We need to create a map of questions here that are associated with this quiz....
 
-        Map<Integer, question> questionCollection = new HashMap<>();
+        Map<Long, question> questionCollection = new HashMap<>();
 
         if (c1.moveToFirst()) {
             do {
                 // get each question..
                 long questionId = c1.getInt(c1.getColumnIndex(KEY_QUESTION_ID));
-                questionCollection.put((int)questionId, getQuestion(questionId));
+                questionCollection.put(questionId, getQuestion(questionId));
             } while (c1.moveToNext());
         }
 
 
         // now we just construct the quiz
-        quiz newQuiz = new quiz(quizName,quizDescription,quizImage,questionCollection);
+        quiz newQuiz = new quiz(quizName,quizDescription,questionCollection);
         newQuiz.setId(quizId);
         newQuiz.setGrade(quizGrade);
         newQuiz.numberOfQuestions = quizNumOfQues;
@@ -348,7 +351,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUIZ_DESCRIPTION, quiz.getDescription());
         values.put(QUIZ_NUM_OF_QUES, quiz.numberOfQuestions);
         values.put(QUIZ_GRADE, quiz.getGrade());
-        values.put(QUIZ_IMAGE_DIRECTORY, quiz.getQuizPictureFileName());
+
 
 
         // updating row

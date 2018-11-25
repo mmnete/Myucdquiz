@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.questionClasses.quiz;
@@ -28,15 +26,13 @@ public class EditQuiz extends AppCompatActivity {
     private long quizId;
     private quiz thisQuiz;
 
-    // The UI elements
-    private ImageView quizImage;
-    private Button changeImage;
+
     private EditText quizName;
     private Button changeQuizName;
     private EditText quizDescription;
     private Button changeQuizDescription;
     private Button viewQuizQuestions;
-    private Button addQuestion;
+
 
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
@@ -69,22 +65,14 @@ public class EditQuiz extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
 
-        // declare all the UI elements
-         quizImage = (ImageView) findViewById(R.id.quizImage);
-         changeImage = (Button) findViewById(R.id.updateImage);
+
          quizName = (EditText) findViewById(R.id.quizName);
          changeQuizName = (Button) findViewById(R.id.updateQuizName);
          quizDescription = (EditText) findViewById(R.id.quizDescription);
          changeQuizDescription = (Button) findViewById(R.id.updateQuizDescription);
          viewQuizQuestions = (Button) findViewById(R.id.editQuestions);
-         addQuestion = (Button) findViewById(R.id.addQuestion);
 
-         changeImage.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 selectNewImage();
-             }
-         });
+
 
          changeQuizName.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -118,13 +106,7 @@ public class EditQuiz extends AppCompatActivity {
              }
          });
 
-         addQuestion.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 //Toast.makeText(getBaseContext(),"Hello",Toast.LENGTH_LONG).show();
-                 createQuestion();
-             }
-         });
+
 
          viewQuizQuestions.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -144,12 +126,11 @@ public class EditQuiz extends AppCompatActivity {
         super.onResume();
 
 
-        // the buttons are in active until we have permission to view storage
-        changeImage.setActivated(false);
+
         changeQuizName.setActivated(false);
         changeQuizDescription.setActivated(false);
         viewQuizQuestions.setActivated(false);
-        addQuestion.setActivated(false);
+
 
         checkPermission();
     }
@@ -218,23 +199,25 @@ public class EditQuiz extends AppCompatActivity {
 
         // once we allowed to access memory all the buttons will enabled...
         // the buttons are in active until we have permission to view storage
-        changeImage.setActivated(true);
+
         changeQuizName.setActivated(true);
         changeQuizDescription.setActivated(true);
         viewQuizQuestions.setActivated(true);
-        addQuestion.setActivated(true);
+
 
         // now let us get our quiz
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
 
+        /*
         if(thisQuiz.getQuizPictureFileName().equals("default"))
         {
-            quizImage.setImageResource(R.drawable.defaultquizimage);
+          //  quizImage.setImageResource(R.drawable.defaultquizimage);
         } else
         {
-            quizImage.setImageBitmap(BitmapFactory.decodeFile(thisQuiz.getQuizPictureFileName()));
+            //quizImage.setImageBitmap(BitmapFactory.decodeFile(thisQuiz.getQuizPictureFileName()));
         }
+        */
 
         quizDescription.setText(thisQuiz.getDescription());
         quizName.setText(thisQuiz.getName());
@@ -286,8 +269,8 @@ public class EditQuiz extends AppCompatActivity {
             cursor.close();
 
             // String picturePath contains the path of selected Image
-            quizImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            thisQuiz.setQuizPictureFileName(picturePath);
+          //  quizImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+           // thisQuiz.setQuizPictureFileName(picturePath);
             DatabaseHelper db = new DatabaseHelper(getApplicationContext());
             db.updateQuiz(thisQuiz);
             Toast.makeText(getApplicationContext(),"New Image added", Toast.LENGTH_LONG).show();
