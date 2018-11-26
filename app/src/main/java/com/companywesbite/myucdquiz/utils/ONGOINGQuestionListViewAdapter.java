@@ -72,7 +72,12 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         }
         // Set the results into TextViews
         holder.name.setText(arraylist.get(position).getTitle());
-        holder.score.setText(arraylist.get(position).getCorrect()+"");
+        if (arraylist.get(position).getCorrect()==1)
+        {
+            holder.score.setText("Accepted");
+        } else {
+            holder.score.setText("Not Accepted");
+        }
 
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override

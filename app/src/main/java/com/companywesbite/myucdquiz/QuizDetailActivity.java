@@ -177,17 +177,24 @@ public class QuizDetailActivity extends AppCompatActivity {
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
         //Set title that shows how many questions are in the Flashcards Collection
-        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber()));
+        quizNumQuestions.setText("Questionsi:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
         //list is the ListView on this screen
         list = (ListView) findViewById(R.id.listView);
         //questionList is a List<> with the questions of this Flashcards Collection
         questionList = thisQuiz.getQuestions();
-        for (int i = 0; i<thisQuiz.getQuestionNumber(); i++){
-            questions.get(i).setAnswered(1);
+        //Go through all the questions...
+        for (int i = 0; i<thisQuiz.getQuestionNumber(); i++) {
+            //If (100 - current score), so the error percentage is below the error tolerance
+            if (100 - questions.get(i).getCurrScore() < thisQuiz.getErrorTolerance()) {
+                //Question is accepted
+                questions.get(i).setCorrect(1);
+            } else {
+                //Question is not accepted
+                questions.get(i).setCorrect(0);
+            }
+            adapter = new ONGOINGQuestionListViewAdapter(this, this, questionList, quizId);
+            list.setAdapter(adapter);
         }
-        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList,quizId);
-        list.setAdapter(adapter);
-
     }
 
     private void makeDisplay()
@@ -196,7 +203,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
         quizDescription.setText(thisQuiz.getDescription());
-        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber()));
+        quizNumQuestions.setText("Questionsi:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
     }
 
 
