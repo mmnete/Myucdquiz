@@ -151,7 +151,7 @@ public class AnswerQuestionDialogBox {
                 thisQuestion.setCurrScore(score*100);
                 DatabaseHelper db = new DatabaseHelper(context);
                 db.updateQuestion(thisQuestion);
-                currScore.setText(100+"");
+                currScore.setText(Double.toString(thisQuestion.getCurrScore()));
             }
         });
 
