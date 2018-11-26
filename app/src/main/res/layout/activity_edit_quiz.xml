@@ -8,52 +8,50 @@
    tools:context=".EditQuiz">
 
 
-    <Button
-        android:id="@+id/editQuestions"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="bottom"
-        android:text="MAKE CHAGES TO QUESTIONS"
-        android:background="@color/colorPrimary"
-        android:textColor="#ffff"/>
-
     <EditText
-    android:id="@+id/quizName"
-    android:hint="Quiz Name"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:maxLines="1"
-    android:layout_margin="5dp"
-    />
+        android:id="@+id/quizName"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        android:hint="Enter New Quiz Name"
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/updateQuizName"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:paddingTop="5dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:paddingTop="5dp"
         android:text="UPDATE QUIZ NAME"
-        android:background="@color/colorPrimary"
-        android:textColor="#ffff"/>
+        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     <EditText
-    android:id="@+id/quizDescription"
-    android:hint="Quiz Description"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_margin="5dp"
-    android:maxLines="4"/>
+        android:id="@+id/quizDescription"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        android:hint="Enter New Quiz Description"
+        android:maxLines="4" />
 
     <Button
         android:id="@+id/updateQuizDescription"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@android:color/holo_green_light"
         android:text="UPDATE QUIZ DESCRIPTION"
-        android:background="@color/colorPrimary"
-        android:textColor="#ffff"/>
+        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+    <Button
+        android:id="@+id/editQuestions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="5dp"
+        android:text="MAKE CHANGES TO QUESTIONS"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
 
 </LinearLayout>

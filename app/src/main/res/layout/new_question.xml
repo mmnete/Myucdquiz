@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_margin="5dp"
-        android:hint="Title (shortcut when accessing card)"
+        android:hint="Enter Card Title"
         android:maxLines="1" />
 
     <EditText
@@ -42,13 +42,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="CANCEL"/>
+        android:backgroundTint="@color/colorPrimary"
+        android:text="CANCEL" />
 
     <Button
         android:id="@+id/createQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:backgroundTint="@android:color/holo_green_light"
         android:elevation="0dp"
         android:text="ADD QUESTION" />
 
