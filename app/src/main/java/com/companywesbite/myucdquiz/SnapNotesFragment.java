@@ -88,7 +88,7 @@ public class SnapNotesFragment extends Fragment {
     private void loadCamera()
     {
         // here is where we will load the camera activity....
-        Intent i = new Intent(getContext(), CameraActivity.class);
+        Intent i = new Intent(getContext(), NoteCameraActivity.class);
         startActivity(i);
     }
 

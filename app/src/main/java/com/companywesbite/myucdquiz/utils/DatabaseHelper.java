@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String QUIZ_DESCRIPTION = "quiz_description";
     private static final String QUIZ_NUM_OF_QUES = "quiz_num_of_ques";
     private static final String QUIZ_GRADE = "quiz_grade";
-    private static final String QUIZ_IMAGE_DIRECTORY = "quiz_image_directory";
+    private static final String QUIZ_TOLERANCE = "quiz_tolerance";
 
     // QUESTION Table - column names
     private static final String QUESTION_NAME = "question_name";
@@ -72,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_QUIZ = "CREATE TABLE "
             + TABLE_QUIZ + "(" + KEY_ID + " INTEGER PRIMARY KEY," + QUIZ_NAME
             + " TEXT," + QUIZ_DESCRIPTION + " TEXT," + QUIZ_NUM_OF_QUES + " INTEGER," + QUIZ_GRADE
-            + " INTEGER" + ")";
+            + " INTEGER," + QUIZ_TOLERANCE + " INTEGER" + ")";
 
     // Tag table create statement
     private static final String CREATE_TABLE_QUESTION = "CREATE TABLE " + TABLE_QUESTION
@@ -168,6 +168,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_QUIZ_QUESTION, KEY_QUESTION_ID + " = ? AND " + KEY_QUIZ_ID + " = ?" ,
                 new String[] { String.valueOf(question_id), String.valueOf(quiz_id) });
+        quiz temp = getQuiz(quiz_id);
+        temp.deleteQuestion();
+        updateQuiz(temp);
     }
 
     /*
@@ -250,6 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUIZ_DESCRIPTION, quiz.getDescription());
         values.put(QUIZ_NUM_OF_QUES, quiz.numberOfQuestions);
         values.put(QUIZ_GRADE, quiz.getGrade());
+        values.put(QUIZ_TOLERANCE, quiz.getErrorTolerance());
 
 
         // insert row
@@ -282,6 +286,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String quizDescription = c.getString(c.getColumnIndex(QUIZ_DESCRIPTION));
         Integer quizNumOfQues = c.getInt(c.getColumnIndex(QUIZ_NUM_OF_QUES));
         Integer quizGrade = c.getInt(c.getColumnIndex(QUIZ_GRADE));
+        Integer quizTolerane = c.getInt(c.getColumnIndex(QUIZ_TOLERANCE));
 
 
         // now we just need to get the list of questions in this quiz
@@ -306,7 +311,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         // now we just construct the quiz
-        quiz newQuiz = new quiz(quizName,quizDescription,questionCollection);
+        quiz newQuiz = new quiz(quizName,quizDescription,questionCollection,quizTolerane);
         newQuiz.setId(quizId);
         newQuiz.setGrade(quizGrade);
         newQuiz.numberOfQuestions = quizNumOfQues;
@@ -351,6 +356,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUIZ_DESCRIPTION, quiz.getDescription());
         values.put(QUIZ_NUM_OF_QUES, quiz.numberOfQuestions);
         values.put(QUIZ_GRADE, quiz.getGrade());
+        values.put(QUIZ_TOLERANCE, quiz.getErrorTolerance());
 
 
 

@@ -98,4 +98,14 @@ public class question {
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
+
+    public boolean isCorrect()
+    {
+        return getCorrect() == 1;
+    }
+
+    public boolean isAnswered()
+    {
+        return  getAnswered() == 1;
+    }
 }

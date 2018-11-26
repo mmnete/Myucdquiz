@@ -1,11 +1,15 @@
 package com.companywesbite.myucdquiz;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.questionClasses.question;
@@ -23,6 +27,8 @@ public class CreateNewQuiz extends AppCompatActivity {
     private EditText quizDescription;
     private String quizImageName = "default";
     private Button submitButton;
+    private SeekBar errorToleranceBar;
+    private TextView percent;
 
 
 
@@ -40,10 +46,27 @@ public class CreateNewQuiz extends AppCompatActivity {
         quizName = (EditText) findViewById(R.id.quizName);
         quizDescription = (EditText) findViewById(R.id.quizDescription);
         submitButton = (Button) findViewById(R.id.createQuizButton);
+        errorToleranceBar = (SeekBar) findViewById(R.id.errorTolerance);
+        percent = (TextView) findViewById(R.id.percent);
+        errorToleranceBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        errorToleranceBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
-        // set the default value of the quizImage
-      //  quizImage.setImageResource(R.drawable.defaultquizimage);
+        errorToleranceBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                percent.setText(Integer.toString(progress)+"%");
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
         // when the user is done filling in the form..
@@ -72,10 +95,13 @@ public class CreateNewQuiz extends AppCompatActivity {
         } else if(quizDescription.getText().toString().trim().length() < 5)
         {
             Toast.makeText(this,"Quiz Description too short!",Toast.LENGTH_LONG).show();
+        } else if(errorToleranceBar.getProgress() < 60 )
+        {
+            Toast.makeText(this,"Please increase MATCH percent!",Toast.LENGTH_LONG).show();
         } else
         {
             Map<Long, question> newQuestions = new HashMap<>();
-            quiz newQuiz = new quiz(quizName.getText().toString(),quizDescription.getText().toString(),newQuestions);
+            quiz newQuiz = new quiz(quizName.getText().toString(),quizDescription.getText().toString(),newQuestions,errorToleranceBar.getProgress());
             DatabaseHelper db = new DatabaseHelper(this);
             db.createQuiz(newQuiz);
             Toast.makeText(this,"Quiz Created Successfully!",Toast.LENGTH_LONG).show();

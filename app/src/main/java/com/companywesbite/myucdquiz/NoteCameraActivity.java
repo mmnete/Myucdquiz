@@ -1,6 +1,4 @@
 package com.companywesbite.myucdquiz;
-
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,13 +22,25 @@ import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
 
-public class CameraActivity extends AppCompatActivity {
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name: NoteCameraActivity
+ * Functionality: This is the activity loaded up when the user wants to take a snap note
+ *                It uses the camera and a google api to read text on the camera to perform
+ *                note creation.
+ *
+ */
+
+public class NoteCameraActivity extends AppCompatActivity {
 
 
-    SurfaceView cameraView;
-    TextView textView;
-    CameraSource cameraSource;
-    final int RequestCameraPermissionID = 1001;
+    // UI Elements
+    private SurfaceView cameraViewUI;
+    private TextView textView;
+    private CameraSource cameraSource;
+    final int CAMERA_PERMISSION_ID = 1001;
 
     private Button cancelButton;
     private Button snapButton;
@@ -39,12 +49,12 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case RequestCameraPermissionID: {
+            case CAMERA_PERMISSION_ID: {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         {
 
-                            Toast.makeText(CameraActivity.this,"You have to give the App camera permission!",Toast.LENGTH_LONG);
+                            Toast.makeText(NoteCameraActivity.this,"You have to give the App camera permission!",Toast.LENGTH_LONG);
 
                             return;
 
@@ -53,7 +63,7 @@ public class CameraActivity extends AppCompatActivity {
                     }
                     try {
 
-                        cameraSource.start(cameraView.getHolder());
+                        cameraSource.start(cameraViewUI.getHolder());
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -72,7 +82,7 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
 
 
-        cameraView = (SurfaceView) findViewById(R.id.surface_view);
+        cameraViewUI = (SurfaceView) findViewById(R.id.surface_view);
         textView = (TextView) findViewById(R.id.text_view);
 
         cancelButton = (Button) findViewById(R.id.cancelButton);
@@ -105,7 +115,7 @@ public class CameraActivity extends AppCompatActivity {
                     .setAutoFocusEnabled(true)
                     .build();
 
-            cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            cameraViewUI.getHolder().addCallback(new SurfaceHolder.Callback() {
                 @Override
                 public void surfaceCreated(SurfaceHolder holder) {
 
@@ -113,13 +123,13 @@ public class CameraActivity extends AppCompatActivity {
                     try {
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
-                            ActivityCompat.requestPermissions(CameraActivity.this,
+                            ActivityCompat.requestPermissions(NoteCameraActivity.this,
                                     new String[]{Manifest.permission.CAMERA},
-                                    RequestCameraPermissionID);
+                                    CAMERA_PERMISSION_ID);
 
                             return;
                         }
-                        cameraSource.start(cameraView.getHolder());
+                        cameraSource.start(cameraViewUI.getHolder());
                     } catch (IOException e)
                     {
                         e.printStackTrace();

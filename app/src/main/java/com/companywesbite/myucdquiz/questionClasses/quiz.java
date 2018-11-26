@@ -13,13 +13,15 @@ public class quiz {
     private Map<Long, question> questions; // We use a map so that we can allow fast access
     public int numberOfQuestions = 0;
     private int grade = 0;
+    private int errorTolerance = 0;
 
-    public quiz(String name, String description, Map<Long, question> questions)
+    public quiz(String name, String description, Map<Long, question> questions, int errorTolerance)
     {
         this.id = id;
         this.name = name;
         this.description = description;
         this.questions = questions;
+        this.errorTolerance = errorTolerance;
     }
 
     public long getId() {
@@ -60,10 +62,9 @@ public class quiz {
     }
 
     // This will have to interact with the database class to propagate changes.
-    public void deleteQuestion(int id)
+    public void deleteQuestion()
     {
         this.numberOfQuestions--;
-        this.questions.remove(id);
     }
 
     public int getGrade() {
@@ -83,4 +84,28 @@ public class quiz {
         }
         return tempQuestionCollection;
     }
+
+    public int getErrorTolerance() {
+        return errorTolerance;
+    }
+
+    public void setErrorTolerance(int errorTolerance) {
+        this.errorTolerance = errorTolerance;
+    }
+
+    // returns how many questions are correct...
+    public double getPercentCorrect()
+    {
+        double out = 0;
+        List<question> currQuestions = getQuestions();
+        for(int i = 0; i < currQuestions.size(); i++)
+        {
+            if(currQuestions.get(i).isCorrect())
+            {
+                out++;
+            }
+        }
+        return out/currQuestions.size();
+    }
+
 }

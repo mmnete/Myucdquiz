@@ -13,14 +13,7 @@
         android:textSize="20dp"
         android:layout_margin="5dp"/>
 
-    <Button
-        android:id="@+id/answerButton"
-        android:text="A"
-        android:textStyle="bold"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:textSize="15dp"
-        android:layout_margin="5dp" />
+
 
     <TextView
         android:textStyle="bold"

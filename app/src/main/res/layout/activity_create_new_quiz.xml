@@ -25,16 +25,28 @@
             android:layout_margin="5dp"
             android:maxLines="4"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="HOW MUCH SHOULD ANSWERED MATACH IN THIS QUIZ?"
+        android:id="@+id/percent"/>
 
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="70"
+        android:layout_margin="5dp"
+        android:id="@+id/errorTolerance"/>
 
     <Button
+        android:id="@+id/createQuizButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="CREATE"
-        android:id="@+id/createQuizButton"
         android:background="@color/colorPrimary"
-        android:textColor="#ffff"/>
+        android:text="CREATE"
+        android:textColor="#ffff" />
     
 
 </LinearLayout>

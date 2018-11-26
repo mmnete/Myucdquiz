@@ -39,7 +39,7 @@
             android:name=".EditQuiz"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".NoteCameraActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -55,8 +55,10 @@
         <activity
             android:name=".ViewQuestionsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".OngoingQuizActivity" />
-        <activity android:name=".QuestionImageViewer"></activity>
+        <activity android:name=".OngoingQuizActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".QuestionImageViewer"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -55,7 +55,7 @@ public class OngoingQuizActivity extends AppCompatActivity{
         getSupportActionBar().setTitle(thisQuiz.getName() + " (ON-GOING)");
         list = (ListView) findViewById(R.id.listView);
         questionList = thisQuiz.getQuestions();
-        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList);
+        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList,quizId);
         list.setAdapter(adapter);
     }
 

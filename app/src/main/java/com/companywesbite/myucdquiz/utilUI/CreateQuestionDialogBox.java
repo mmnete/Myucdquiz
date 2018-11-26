@@ -155,17 +155,17 @@ public class CreateQuestionDialogBox {
 
     private boolean createQuestion(String questionName, String questionDescription, String questionAnswer)
     {
-        if(questionName.trim().length() < 5)
+        if(questionName.trim().length() < 1)
         {
             Toast.makeText(this.context,"Question title too short!",Toast.LENGTH_LONG).show();
             return false;
         }
-        if(questionDescription.trim().length() < 10)
+        if(questionDescription.trim().length() < 1)
         {
             Toast.makeText(this.context,"Question description too short!",Toast.LENGTH_LONG).show();
             return false;
         }
-        if(questionAnswer.trim().length() < 5)
+        if(questionAnswer.trim().length() < 1)
         {
             Toast.makeText(this.context,"Question answer too short!",Toast.LENGTH_LONG).show();
             return false;

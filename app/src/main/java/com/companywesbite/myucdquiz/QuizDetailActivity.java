@@ -13,8 +13,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,6 @@ public class QuizDetailActivity extends AppCompatActivity {
     private quiz thisQuiz;
 
     // UI elements
-    private ImageView quizImage;
     private TextView quizDescription;
     private TextView quizNumQuestions;
     private ListView list;
@@ -53,8 +53,8 @@ public class QuizDetailActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
 
     private CreateQuestionDialogBox alert;
-
     private boolean deleted = false;
+
 
 
     @Override
@@ -73,6 +73,8 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz(quizId);
 
+       // Log.d("TAG",Double.toString(thisQuiz.getErrorTolerance()));
+
         // set the top bar information
         // to display back button
         getSupportActionBar().setTitle(thisQuiz.getName());
@@ -80,7 +82,6 @@ public class QuizDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
 
-        quizImage = (ImageView) findViewById(R.id.quizImage);
          quizDescription = (TextView) findViewById(R.id.quizDescription);
          quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
          addQuestion = (FloatingActionButton) findViewById(R.id.addQuestion);
@@ -89,6 +90,16 @@ public class QuizDetailActivity extends AppCompatActivity {
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
+
+         // blinking text
+        TextView myText = (TextView) findViewById(R.id.instruct);
+
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(200); //You can manage the time of the blink with this parameter
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(20);
+        myText.startAnimation(anim);
 
          //update the quiz table
         updateQuizTable();
@@ -165,11 +176,12 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db2 = new DatabaseHelper(this);
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
-
+        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.numberOfQuestions));
         list = (ListView) findViewById(R.id.listView);
         questionList = thisQuiz.getQuestions();
-        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList);
+        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList,quizId);
         list.setAdapter(adapter);
+
     }
 
     private void makeDisplay()
@@ -177,8 +189,6 @@ public class QuizDetailActivity extends AppCompatActivity {
         // now let us get our quiz
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
-
-
         quizDescription.setText(thisQuiz.getDescription());
         quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.numberOfQuestions));
     }
