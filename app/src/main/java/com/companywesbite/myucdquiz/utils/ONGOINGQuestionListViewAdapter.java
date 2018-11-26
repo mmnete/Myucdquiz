@@ -72,7 +72,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         }
         // Set the results into TextViews
         holder.name.setText(arraylist.get(position).getTitle());
-        holder.score.setText(arraylist.get(position).getCurrScore()+"");
+        holder.score.setText(arraylist.get(position).getCorrect()+"");
 
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +82,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
             }
         });
 
+        // Delete question with long click
         holder.name.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

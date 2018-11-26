@@ -11,7 +11,7 @@ public class quiz {
     private String description;
 
     private Map<Long, question> questions; // We use a map so that we can allow fast access
-    public int numberOfQuestions = 0;
+    private int numberOfQuestions = 0;
     private int grade = 0;
     private int errorTolerance = 0;
 
@@ -74,6 +74,10 @@ public class quiz {
     public void setGrade(int grade) {
         this.grade = grade;
     }
+
+    public int getQuestionNumber() {return numberOfQuestions;}
+
+    public void setQuestionNumber(int questionNumber) {this.numberOfQuestions=questionNumber;}
 
 
     public List<question> getQuestions() {

@@ -251,7 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(QUIZ_NAME, quiz.getName());
         values.put(QUIZ_DESCRIPTION, quiz.getDescription());
-        values.put(QUIZ_NUM_OF_QUES, quiz.numberOfQuestions);
+        values.put(QUIZ_NUM_OF_QUES, quiz.getQuestionNumber());
         values.put(QUIZ_GRADE, quiz.getGrade());
         values.put(QUIZ_TOLERANCE, quiz.getErrorTolerance());
 
@@ -314,7 +314,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         quiz newQuiz = new quiz(quizName,quizDescription,questionCollection,quizTolerane);
         newQuiz.setId(quizId);
         newQuiz.setGrade(quizGrade);
-        newQuiz.numberOfQuestions = quizNumOfQues;
+        newQuiz.setQuestionNumber(quizNumOfQues);
 
         return newQuiz;
     }
@@ -354,7 +354,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(QUIZ_NAME, quiz.getName());
         values.put(QUIZ_DESCRIPTION, quiz.getDescription());
-        values.put(QUIZ_NUM_OF_QUES, quiz.numberOfQuestions);
+        values.put(QUIZ_NUM_OF_QUES, quiz.getQuestionNumber());
         values.put(QUIZ_GRADE, quiz.getGrade());
         values.put(QUIZ_TOLERANCE, quiz.getErrorTolerance());
 

@@ -176,9 +176,15 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db2 = new DatabaseHelper(this);
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
-        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.numberOfQuestions));
+        //Set title that shows how many questions are in the Flashcards Collection
+        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber()));
+        //list is the ListView on this screen
         list = (ListView) findViewById(R.id.listView);
+        //questionList is a List<> with the questions of this Flashcards Collection
         questionList = thisQuiz.getQuestions();
+        for (int i = 0; i<thisQuiz.getQuestionNumber(); i++){
+            questions.get(i).setAnswered(1);
+        }
         adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList,quizId);
         list.setAdapter(adapter);
 
@@ -190,7 +196,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
         quizDescription.setText(thisQuiz.getDescription());
-        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.numberOfQuestions));
+        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber()));
     }
 
 

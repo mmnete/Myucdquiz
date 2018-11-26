@@ -62,7 +62,7 @@ public class QuestionListViewAdapter extends ArrayAdapter<question> {
                 DatabaseHelper db = new DatabaseHelper(getContext());
                 db.deleteQuestion(item_list.get(position).getId(), thisQuiz.getId());
                 removeListItem(position);
-                thisQuiz.numberOfQuestions--;
+                thisQuiz.setQuestionNumber(thisQuiz.getQuestionNumber()-1);
                 db.updateQuiz(thisQuiz);
                 Toast.makeText(getContext(),"Question Deleted",Toast.LENGTH_LONG).show();
             }
