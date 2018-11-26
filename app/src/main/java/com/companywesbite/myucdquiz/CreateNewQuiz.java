@@ -29,6 +29,8 @@ public class CreateNewQuiz extends AppCompatActivity {
     private Button submitButton;
     private SeekBar errorToleranceBar;
     private TextView percent;
+    private TextView sensitivity; //shows if error tolerance is high, average or low
+    private TextView sensitivityDescription; //Explains what high, average or low means
 
 
 
@@ -48,15 +50,30 @@ public class CreateNewQuiz extends AppCompatActivity {
         submitButton = (Button) findViewById(R.id.createQuizButton);
         errorToleranceBar = (SeekBar) findViewById(R.id.errorTolerance);
         percent = (TextView) findViewById(R.id.percent);
+        sensitivity = (TextView) findViewById(R.id.sensitivity);
+        sensitivityDescription = (TextView) findViewById(R.id.sensitivityDescription);
         errorToleranceBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
         errorToleranceBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
         errorToleranceBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                percent.setText(Integer.toString(progress)+"%");
+                percent.setText(Integer.toString(progress) + "%");
+                //If progress is below 10%, error sensitivity is low
+                if (progress <= 0) {
+                    sensitivity.setText("No Error tolerance");
+                    sensitivity.setTextColor(Color.RED);
+                    sensitivityDescription.setText("No deviation from correct answer is accepted. Good for learning vocabulary.");
+                } else if (progress <= 20) {
+                    sensitivity.setText("Low Error tolerance");
+                    sensitivity.setTextColor(Color.parseColor("#FF8C00"));
+                    sensitivityDescription.setText("Minor deviation from correct answer is accepted. Good for allowing typos.");
+                } else {
+                    sensitivity.setText("High Error tolerance");
+                    sensitivity.setTextColor(Color.GREEN);
+                    sensitivityDescription.setText("Big deviation from correct answer is accepted. Good for anything that just needs to be vaguely correct.");
+                }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
