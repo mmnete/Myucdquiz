@@ -18,6 +18,7 @@ import com.companywesbite.myucdquiz.QuestionImageViewer;
 import com.companywesbite.myucdquiz.R;
 import com.companywesbite.myucdquiz.SmartAnswerAnalysisEngine;
 import com.companywesbite.myucdquiz.questionClasses.question;
+import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import com.companywesbite.myucdquiz.utils.ShakeListener;
 
@@ -35,14 +36,17 @@ public class AnswerQuestionDialogBox {
     private ShakeListener mShaker;
     private boolean displaying = false;
 
+    private quiz thisQuiz;
 
-    public AnswerQuestionDialogBox(question question, List<question> col, int pos, Context context)
+
+    public AnswerQuestionDialogBox(question question, List<question> col, int pos, Context context, quiz thisQuiz)
     {
         this.thisQuestion = question;
         this.questionId = question.getId();
         this.context = context;
         this.pos = pos;
         this.col = col;
+        this.thisQuiz = thisQuiz;
     }
 
     public void showDialog(Activity activity){
@@ -79,7 +83,13 @@ public class AnswerQuestionDialogBox {
         });
 
         questionDescription.setText(thisQuestion.getDescription());
-        currScore.setText(""+thisQuestion.getCurrScore());
+        if(thisQuestion.isCorrect())
+        {
+            currScore.setText("ACCEPTED PREVIOUS ANSWER");
+        } else
+        {
+            currScore.setText("REJECTED PREVIOUS ANSWER");
+        }
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +109,13 @@ public class AnswerQuestionDialogBox {
                 }
                 thisQuestion = col.get(pos);
                 questionDescription.setText(thisQuestion.getDescription());
-                currScore.setText(""+thisQuestion.getCurrScore());
+                if(thisQuestion.isCorrect())
+                {
+                    currScore.setText("ACCEPTED PREVIOUS ANSWER");
+                } else
+                {
+                    currScore.setText("REJECTED PREVIOUS ANSWER");
+                }
             }
         });
 
@@ -113,7 +129,14 @@ public class AnswerQuestionDialogBox {
                 }
                 thisQuestion = col.get(pos);
                 questionDescription.setText(thisQuestion.getDescription());
-                currScore.setText(""+thisQuestion.getCurrScore());
+                if(thisQuestion.isCorrect())
+                {
+                    currScore.setText("ACCEPTED PREVIOUS ANSWER");
+                } else
+                {
+                    currScore.setText("REJECTED PREVIOUS ANSWER");
+                }
+
             }
         });
 
@@ -149,9 +172,19 @@ public class AnswerQuestionDialogBox {
 
                 double score = Math.round(answerQuestion(userAnswer) * 100.0) / 100.0;
                 thisQuestion.setCurrScore(score*100);
+                if (100 - thisQuestion.getCurrScore() < thisQuiz.getErrorTolerance()) {
+                    //Question is accepted
+                    thisQuestion.setCorrect(1);
+                    currScore.setText("ACCEPTED");
+                } else {
+                    //Question is not accepted
+                    thisQuestion.setCorrect(0);
+                    currScore.setText("REJECTED");
+                }
                 DatabaseHelper db = new DatabaseHelper(context);
                 db.updateQuestion(thisQuestion);
-                currScore.setText(Double.toString(thisQuestion.getCurrScore()));
+
+
             }
         });
 

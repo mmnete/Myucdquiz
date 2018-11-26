@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.companywesbite.myucdquiz.R;
 import com.companywesbite.myucdquiz.questionClasses.question;
+import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utilUI.AnswerQuestionDialogBox;
 
 import java.util.List;
@@ -28,6 +28,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
     Activity activity;
     private  AnswerQuestionDialogBox dialogBox;
     private long quizId;
+    private quiz thisQuiz;
 
     public ONGOINGQuestionListViewAdapter(Context context,Activity activity, List<question> arraylist, long quizId) {
         mContext = context;
@@ -35,6 +36,8 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         this.arraylist = arraylist;
         this.activity = activity;
         this.quizId = quizId;
+        DatabaseHelper db = new DatabaseHelper(context);
+        thisQuiz = db.getQuiz(this.quizId);
     }
 
     public class ViewHolder {
@@ -81,7 +84,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         holder.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              dialogBox = new AnswerQuestionDialogBox(arraylist.get(position),arraylist,position,mContext);
+              dialogBox = new AnswerQuestionDialogBox(arraylist.get(position),arraylist,position,mContext, thisQuiz);
               dialogBox.showDialog(activity);
             }
         });

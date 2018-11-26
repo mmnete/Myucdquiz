@@ -192,6 +192,7 @@ public class QuizDetailActivity extends AppCompatActivity {
                 //Question is not accepted
                 questions.get(i).setCorrect(0);
             }
+           // db2.updateQuestion(questions.get(i));
             adapter = new ONGOINGQuestionListViewAdapter(this, this, questionList, quizId);
             list.setAdapter(adapter);
         }

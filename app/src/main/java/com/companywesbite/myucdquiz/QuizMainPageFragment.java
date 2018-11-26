@@ -118,6 +118,9 @@ public class QuizMainPageFragment extends Fragment {
 
 
     public void clickMe(long quizId){
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        quiz temp = db.getQuiz(quizId);
+        Log.d("TAG",Double.toString(temp.getPercentCorrect()));
         Intent i = new Intent(getContext(), QuizDetailActivity.class);
         i.putExtra("quizId", quizId);
         startActivity(i);
