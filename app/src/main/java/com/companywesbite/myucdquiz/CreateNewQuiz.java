@@ -89,16 +89,13 @@ public class CreateNewQuiz extends AppCompatActivity {
     private void createQuiz()
     {
         // check if all th
-        if(quizName.getText().toString().trim().length() < 3)
+        if(quizName.getText().toString().trim().length() < 1)
         {
-            Toast.makeText(this,"Quiz Name too short!",Toast.LENGTH_LONG).show();
-        } else if(quizDescription.getText().toString().trim().length() < 5)
+            Toast.makeText(this,"Quiz Name can't be empty!",Toast.LENGTH_LONG).show();
+        } else if(quizDescription.getText().toString().trim().length() < 1)
         {
-            Toast.makeText(this,"Quiz Description too short!",Toast.LENGTH_LONG).show();
-        } else if(errorToleranceBar.getProgress() < 60 )
-        {
-            Toast.makeText(this,"Please increase MATCH percent!",Toast.LENGTH_LONG).show();
-        } else
+            Toast.makeText(this,"Quiz Description can't be empty!",Toast.LENGTH_LONG).show();
+        }  else
         {
             Map<Long, question> newQuestions = new HashMap<>();
             quiz newQuiz = new quiz(quizName.getText().toString(),quizDescription.getText().toString(),newQuestions,errorToleranceBar.getProgress());

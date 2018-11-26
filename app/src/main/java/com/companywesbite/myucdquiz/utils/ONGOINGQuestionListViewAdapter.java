@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.companywesbite.myucdquiz.R;
@@ -38,7 +39,6 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
 
     public class ViewHolder {
         TextView name;
-
         TextView score;
     }
 
@@ -65,7 +65,6 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
             // Locate the TextViews in listview_item.xml
             holder.name = (TextView) view.findViewById(R.id.questionName);
             holder.score = (TextView) view.findViewById(R.id.questionScore);
-
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
