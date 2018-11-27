@@ -25,6 +25,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
     Context context;
 
     ProgressBar progressBar;
+    int quizProgress;
 
     public QuizListViewAdapter(Context context, int vg, int id, List<quiz> item_list){
         super(context, vg, id, item_list);
@@ -68,9 +69,8 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         }
         */
 
-
         // PROGRESS BAR
-        int quizProgress = (int) item_list.get(position).getPercentCorrect();
+        quizProgress = (int) item_list.get(position).getPercentCorrect();
         holder.progressBar.setProgress(quizProgress);
 
         // holder.imageView.setImageResource(R.drawable.defaultquizimage);

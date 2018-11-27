@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -176,8 +178,11 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db2 = new DatabaseHelper(this);
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
+        int perCorrect = (int) thisQuiz.getPercentCorrect();
         //Set title that shows how many questions are in the Flashcards Collection
-        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
+        quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
+                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+
+                                    "\n Percent Correct: "+Integer.toString(perCorrect)+"%");
         //list is the ListView on this screen
         list = (ListView) findViewById(R.id.listView);
         //questionList is a List<> with the questions of this Flashcards Collection
@@ -204,7 +209,10 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
         quizDescription.setText(thisQuiz.getDescription());
-        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
+        int perCorrect = (int) thisQuiz.getPercentCorrect();
+        quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
+                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+
+                                    "\n Percent Correct: "+Integer.toString(perCorrect)+"%");
     }
 
 
