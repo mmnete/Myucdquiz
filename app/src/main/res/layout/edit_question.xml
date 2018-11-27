@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:backgroundTint="@color/colorPrimary"
         android:text="CANCEL" />
 
     <Button
@@ -35,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:backgroundTint="@android:color/holo_green_light"
         android:text="SAVE CHANGES" />
 
 </LinearLayout>

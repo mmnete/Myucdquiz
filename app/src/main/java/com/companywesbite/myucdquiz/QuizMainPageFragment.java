@@ -142,7 +142,6 @@ public class QuizMainPageFragment extends Fragment {
         DatabaseHelper db = new DatabaseHelper(getContext());
         final List<quiz> quizes = db.getAllQuizes();
 
-
         QuizListViewAdapter adapter=new QuizListViewAdapter(getContext(),R.layout.quiz_item,R.id.quizName,quizes);
         // Bind data to the ListView
 

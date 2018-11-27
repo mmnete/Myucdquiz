@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.companywesbite.myucdquiz.R;
@@ -23,6 +24,9 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
     ArrayList<String> desc;
     Context context;
 
+    ProgressBar progressBar;
+    int quizProgress;
+
     public QuizListViewAdapter(Context context, int vg, int id, List<quiz> item_list){
         super(context, vg, id, item_list);
         this.context=context;
@@ -35,6 +39,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         public TextView textview;
         public Button button;
         public ImageView imageView;
+        public ProgressBar progressBar;
     }
 
     public View getView(final int position, View convertView, final ViewGroup parent) {
@@ -47,6 +52,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.textview= (TextView) rowView.findViewById(R.id.quizName);
             viewHolder.imageView = (ImageView) rowView.findViewById(R.id.quizImage);
+            viewHolder.progressBar = (ProgressBar) rowView.findViewById(R.id.quizProgressBar);
             viewHolder.button= (Button) rowView.findViewById(R.id.openQuizButton);
             rowView.setTag(viewHolder);
         }
@@ -63,7 +69,11 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         }
         */
 
-       // holder.imageView.setImageResource(R.drawable.defaultquizimage);
+        // PROGRESS BAR
+        quizProgress = (int) item_list.get(position).getPercentCorrect();
+        holder.progressBar.setProgress(quizProgress);
+
+        // holder.imageView.setImageResource(R.drawable.defaultquizimage);
         holder.button.setText("OPEN");
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override

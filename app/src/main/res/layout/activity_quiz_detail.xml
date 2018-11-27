@@ -18,28 +18,38 @@
 
     <TextView
         android:id="@+id/descriptionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:text="Description"
-        android:textSize="20dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:paddingTop="5dp"
+        android:text="Quiz Description:"
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/quizDescription"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
         android:maxLines="4"
-        android:textSize="15dp"
-        android:layout_below="@id/descriptionTitle"/>
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/numQuestions"
-        android:text="Questions"
-        android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/quizDescription"
-        />
+        android:gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:text="Questions"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/instruct"
