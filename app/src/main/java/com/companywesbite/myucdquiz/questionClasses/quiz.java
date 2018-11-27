@@ -1,6 +1,11 @@
 package com.companywesbite.myucdquiz.questionClasses;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,15 +19,30 @@ public class quiz {
     private int numberOfQuestions = 0;
     private int grade = 0;
     private int errorTolerance = 0;
+    public boolean isNull = false;
 
     public quiz(String name, String description, Map<Long, question> questions, int errorTolerance)
     {
-        this.id = id;
         this.name = name;
         this.description = description;
         this.questions = questions;
         this.errorTolerance = errorTolerance;
     }
+
+    public quiz(String jsonString)
+    {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            this.name = jsonObject.getString("name");
+            this.description = jsonObject.getString("description");
+            this.errorTolerance = Integer.valueOf(jsonObject.getString("errorTolerance"));
+            this.questions = new HashMap<>();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            isNull = true;
+        }
+    }
+
 
     public long getId() {
         return id;
@@ -111,5 +131,34 @@ public class quiz {
         }
         return out/currQuestions.size();
     }
+
+    public String toJSON(){
+
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("name", this.name);
+            jsonObject.put("description", this.description);
+            jsonObject.put("numberOfQuestions", Integer.toString(this.numberOfQuestions));
+            jsonObject.put("errorTolerance", Integer.toString(this.getErrorTolerance()));
+
+            JSONArray questionArray = new JSONArray();
+            List<question> questions = this.getQuestions();
+            for(int i = 0; i < questions.size(); i++) {
+                // 1st object
+                JSONObject questionJson = questions.get(i).toJSON();
+                questionArray.put(questionJson);
+            }
+
+            jsonObject.put("questions",questionArray);
+
+            return jsonObject.toString();
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "";
+        }
+
+    }
+
 
 }

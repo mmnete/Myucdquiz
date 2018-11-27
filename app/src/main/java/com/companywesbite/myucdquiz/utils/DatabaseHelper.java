@@ -133,10 +133,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(QUESTION_CURR_SCORE, question.getCurrScore());
         values.put(QUESTION_IMAGE_DIRECTORY, question.getPicturePath());
 
-        Log.d("TAG","Added to database "+question.getPicturePath());
+
         // insert row
         long question_id = db.insert(TABLE_QUESTION, null, values);
-
+        Log.d("TAG","Added to database "+question.getPicturePath());
         // Which quiz is the question assigned to
         createQuestionQuizRow(quiz_id, question_id);
 
@@ -259,7 +259,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // insert row
         long quiz_id = db.insert(TABLE_QUIZ, null, values);
 
-
         return quiz_id;
     }
 
@@ -286,7 +285,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String quizDescription = c.getString(c.getColumnIndex(QUIZ_DESCRIPTION));
         Integer quizNumOfQues = c.getInt(c.getColumnIndex(QUIZ_NUM_OF_QUES));
         Integer quizGrade = c.getInt(c.getColumnIndex(QUIZ_GRADE));
-        Integer quizTolerane = c.getInt(c.getColumnIndex(QUIZ_TOLERANCE));
+        Integer quizTolerance = c.getInt(c.getColumnIndex(QUIZ_TOLERANCE));
 
 
         // now we just need to get the list of questions in this quiz
@@ -311,7 +310,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         // now we just construct the quiz
-        quiz newQuiz = new quiz(quizName,quizDescription,questionCollection,quizTolerane);
+        quiz newQuiz = new quiz(quizName,quizDescription,questionCollection,quizTolerance);
         newQuiz.setId(quizId);
         newQuiz.setGrade(quizGrade);
         newQuiz.setQuestionNumber(quizNumOfQues);

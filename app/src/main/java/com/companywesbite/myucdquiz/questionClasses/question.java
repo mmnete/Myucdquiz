@@ -1,5 +1,8 @@
 package com.companywesbite.myucdquiz.questionClasses;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class question {
 
     // What defines a question
@@ -107,5 +110,22 @@ public class question {
     public boolean isAnswered()
     {
         return  getAnswered() == 1;
+    }
+
+    public JSONObject toJSON(){
+
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("title", this.title);
+            jsonObject.put("description", this.description);
+            jsonObject.put("answer", this.answer);
+
+            return jsonObject;
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

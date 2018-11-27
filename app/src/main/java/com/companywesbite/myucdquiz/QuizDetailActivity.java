@@ -73,7 +73,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz(quizId);
 
-       // Log.d("TAG",Double.toString(thisQuiz.getErrorTolerance()));
+     //Log.d("TAG",Double.toString(thisQuiz.getErrorTolerance()));
 
         // set the top bar information
         // to display back button
@@ -143,6 +143,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     private void createQuestion()
@@ -173,6 +174,7 @@ public class QuizDetailActivity extends AppCompatActivity {
     }
 
     public void updateQuizTable(){
+
         DatabaseHelper db2 = new DatabaseHelper(this);
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
@@ -202,7 +204,7 @@ public class QuizDetailActivity extends AppCompatActivity {
     {
         // now let us get our quiz
         DatabaseHelper db = new DatabaseHelper(this);
-        thisQuiz = db.getQuiz((long)quizId);
+        thisQuiz = db.getQuiz(quizId);
         quizDescription.setText(thisQuiz.getDescription());
         quizNumQuestions.setText("Questionsi:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
     }

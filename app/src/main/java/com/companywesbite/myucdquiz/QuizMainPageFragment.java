@@ -2,14 +2,17 @@ package com.companywesbite.myucdquiz;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import com.companywesbite.myucdquiz.utils.QuizListViewAdapter;
 
+import java.net.URI;
 import java.util.List;
 
 public class QuizMainPageFragment extends Fragment {
@@ -32,8 +36,11 @@ public class QuizMainPageFragment extends Fragment {
 
     private FloatingActionButton newQuizButton;
     private ListView lstview;
+
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
+
     private View view;
+
 
 
 
@@ -46,6 +53,8 @@ public class QuizMainPageFragment extends Fragment {
         context=getContext();
         lstview=(ListView)view.findViewById(R.id.quizList);
 
+
+
         // creating a new quiz.
         newQuizButton = (FloatingActionButton) view.findViewById(R.id.addQuizButton);
         newQuizButton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +64,8 @@ public class QuizMainPageFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+
 
 
         return view;
@@ -81,7 +92,7 @@ public class QuizMainPageFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_GET_IMAGE);
-        }else
+        } else
         {
             // we are good to go
             newQuizButton.setEnabled(true);
@@ -118,9 +129,9 @@ public class QuizMainPageFragment extends Fragment {
 
 
     public void clickMe(long quizId){
-        DatabaseHelper db = new DatabaseHelper(getContext());
-        quiz temp = db.getQuiz(quizId);
-        Log.d("TAG",Double.toString(temp.getPercentCorrect()));
+       // DatabaseHelper db = new DatabaseHelper(getContext());
+       // quiz temp = db.getQuiz(quizId);
+      //  Log.d("TAG",temp.toJSON());
         Intent i = new Intent(getContext(), QuizDetailActivity.class);
         i.putExtra("quizId", quizId);
         startActivity(i);
@@ -137,13 +148,63 @@ public class QuizMainPageFragment extends Fragment {
 
         lstview.setAdapter(adapter);
         lstview.setEmptyView((TextView) view.findViewById(R.id.emptyElement));
+
         lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Log.d("TAG",Integer.toString((int)quizes.get(position).getId()));
                 clickMe(quizes.get(position).getId());
             }
         });
+        lstview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Sharing is caring. Share flashcards with others right now :-)")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                               Intent i = new Intent(getActivity(),BluetoothSharingActivity.class);
+                                i.putExtra("quizJSON",quizes.get(position).toJSON());
+                                startActivity(i);
+
+
+
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                final AlertDialog alert = builder.create();
+                alert.setOnShowListener( new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLUE);
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED);
+                    }
+                });
+                alert.show();
+                return true;
+            }
+        });
+
+
+    }
+
+    private void sendEmail(URI screenshot) {
+        String email = "mmnete@trinity.edu";
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for App ");
+        intent.putExtra(Intent.EXTRA_TEXT, "\n\n\n\n\nApp Version: \nAndroid Version:");
+        if (screenshot != null) {
+            intent.putExtra(Intent.EXTRA_STREAM, screenshot);
+        }
+        startActivity(Intent.createChooser(intent, "Send feedback..."));
     }
 
 

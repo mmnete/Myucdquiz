@@ -93,7 +93,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         holder.name.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+               AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setMessage("Are you sure you want to delete question")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
