@@ -177,7 +177,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
         //Set title that shows how many questions are in the Flashcards Collection
-        quizNumQuestions.setText("Questionsi:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
+        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
         //list is the ListView on this screen
         list = (ListView) findViewById(R.id.listView);
         //questionList is a List<> with the questions of this Flashcards Collection
@@ -204,7 +204,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
         quizDescription.setText(thisQuiz.getDescription());
-        quizNumQuestions.setText("Questionsi:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
+        quizNumQuestions.setText("Questions:  "+Integer.toString(thisQuiz.getQuestionNumber())+" Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
     }
 
 
