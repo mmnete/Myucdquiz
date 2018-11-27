@@ -70,7 +70,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         */
 
         // PROGRESS BAR
-        quizProgress = (int) item_list.get(position).getPercentCorrect();
+        quizProgress = (int)(100*item_list.get(position).getPercentCorrect());
         holder.progressBar.setProgress(quizProgress);
 
         // holder.imageView.setImageResource(R.drawable.defaultquizimage);
