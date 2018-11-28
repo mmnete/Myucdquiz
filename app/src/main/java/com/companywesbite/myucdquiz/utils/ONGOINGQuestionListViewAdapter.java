@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.companywesbite.myucdquiz.R;
@@ -42,7 +43,8 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
 
     public class ViewHolder {
         TextView name;
-        TextView score;
+        ImageView correctOrNot;
+        //TextView score;
     }
 
     @Override
@@ -67,7 +69,8 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.ongoing_question_item, null);
             // Locate the TextViews in listview_item.xml
             holder.name = (TextView) view.findViewById(R.id.questionName);
-            holder.score = (TextView) view.findViewById(R.id.questionScore);
+            holder.correctOrNot = (ImageView) view.findViewById(R.id.correctOrNot);
+            //holder.score = (TextView) view.findViewById(R.id.questionScore);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -76,9 +79,10 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         holder.name.setText(arraylist.get(position).getTitle());
         if (arraylist.get(position).getCorrect()==1)
         {
-            holder.score.setText("Accepted");
+            //holder.score.setText("Accepted");
+            holder.correctOrNot.setImageResource(R.drawable.ic_check_circle_green_24dp);
         } else {
-            holder.score.setText("Not Accepted");
+           // holder.score.setText("Not Accepted");
         }
 
         holder.name.setOnClickListener(new View.OnClickListener() {

@@ -180,7 +180,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db2 = new DatabaseHelper(this);
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
-        int perCorrect = (int) thisQuiz.getPercentCorrect();
+        int perCorrect = (int) (thisQuiz.getPercentCorrect()*100);
         //Set title that shows how many questions are in the Flashcards Collection
         quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
                                     "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+
