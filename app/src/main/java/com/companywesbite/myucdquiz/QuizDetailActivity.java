@@ -19,6 +19,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class QuizDetailActivity extends AppCompatActivity {
     private FloatingActionButton addQuestion;
     private FloatingActionButton editQuiz;
     private FloatingActionButton deleteButton;
+    private ProgressBar progressBar;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -92,6 +94,7 @@ public class QuizDetailActivity extends AppCompatActivity {
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
+         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
          // blinking text
         TextView myText = (TextView) findViewById(R.id.instruct);
@@ -183,8 +186,8 @@ public class QuizDetailActivity extends AppCompatActivity {
         int perCorrect = (int) (thisQuiz.getPercentCorrect()*100);
         //Set title that shows how many questions are in the Flashcards Collection
         quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
-                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+
-                                    "\n Percent Correct: "+Integer.toString(perCorrect)+"%");
+                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
+        progressBar.setProgress(perCorrect);
         //list is the ListView on this screen
         list = (ListView) findViewById(R.id.listView);
         //questionList is a List<> with the questions of this Flashcards Collection
