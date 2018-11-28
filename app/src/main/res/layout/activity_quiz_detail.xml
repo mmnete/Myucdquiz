@@ -55,8 +55,8 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="20dp"
@@ -163,6 +163,18 @@
             android:textSize="20dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/percentage"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="45dp"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textAlignment="center" />
 
 
 </RelativeLayout>

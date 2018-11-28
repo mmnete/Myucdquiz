@@ -40,6 +40,7 @@ public class QuizDetailActivity extends AppCompatActivity {
     // UI elements
     private TextView quizDescription;
     private TextView quizNumQuestions;
+    private TextView percentage;
     private ListView list;
     private List<question> questionList;
     private List<question> questions;
@@ -88,6 +89,7 @@ public class QuizDetailActivity extends AppCompatActivity {
 
          quizDescription = (TextView) findViewById(R.id.quizDescription);
          quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
+         percentage = (TextView) findViewById(R.id.percentage);
          addQuestion = (FloatingActionButton) findViewById(R.id.addQuestion);
          editQuiz = (FloatingActionButton) findViewById(R.id.editQuizFloatingButton);
          deleteButton = (FloatingActionButton) findViewById(R.id.deleteQuizButton);
@@ -186,8 +188,11 @@ public class QuizDetailActivity extends AppCompatActivity {
         int perCorrect = (int) (thisQuiz.getPercentCorrect()*100);
         //Set title that shows how many questions are in the Flashcards Collection
         quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
-                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()));
+                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()) +"%");
+        //Set circular progress bar to right level
         progressBar.setProgress(perCorrect);
+        //Set percentage inside progress bar to right amount
+        percentage.setText(perCorrect+ "%");
         //list is the ListView on this screen
         list = (ListView) findViewById(R.id.listView);
         //questionList is a List<> with the questions of this Flashcards Collection
