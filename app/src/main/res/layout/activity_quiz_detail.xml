@@ -69,7 +69,6 @@
         android:layout_below="@id/numQuestions"
         android:layout_alignParentStart="true"
         android:layout_weight="1"
-        android:background="@drawable/border_ui"
         android:dividerHeight="1dp" />
 
     <android.support.design.widget.FloatingActionButton
