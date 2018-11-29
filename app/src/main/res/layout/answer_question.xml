@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
 
@@ -10,6 +10,7 @@
         android:id="@+id/questionHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:text="Question:"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -18,21 +19,27 @@
     <TextView
         android:id="@+id/questionDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_margin="5dp"
         android:scrollbars="vertical"
-        android:textAlignment="center"
+
+        android:scrollbarStyle="insideOverlay"
+        android:fadeScrollbars="true"
+        android:fadingEdge="vertical"
         android:textSize="12sp" />
 
     <EditText
         android:id="@+id/questionAnswer"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_margin="5dp"
         android:hint="Enter answer"
         android:maxLines="4"
         android:scrollbars="vertical"
-        android:textAlignment="center" />
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+         />
 
     <TextView
         android:id="@+id/currScore"
@@ -67,17 +74,17 @@
         android:text="EXIT QUIZ" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/showAnswerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:backgroundTint="@android:color/holo_green_light"
-        android:text="SUBMIT ANSWER" />
+        android:text="SHOW ANSWER" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button

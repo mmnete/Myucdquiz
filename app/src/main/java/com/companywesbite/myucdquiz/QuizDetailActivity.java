@@ -17,6 +17,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ public class QuizDetailActivity extends AppCompatActivity {
     private FloatingActionButton addQuestion;
     private FloatingActionButton editQuiz;
     private FloatingActionButton deleteButton, menuButton;
+    private TextView percentage;
+    private ProgressBar progressBar;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -93,6 +96,8 @@ public class QuizDetailActivity extends AppCompatActivity {
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
+         percentage = (TextView) findViewById(R.id.percentage);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
          // blinking text
         TextView myText = (TextView) findViewById(R.id.instruct);
@@ -210,12 +215,16 @@ public class QuizDetailActivity extends AppCompatActivity {
         DatabaseHelper db2 = new DatabaseHelper(this);
         thisQuiz = db2.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
-        int perCorrect = (int) thisQuiz.getPercentCorrect();
+        int perCorrect = (int) (thisQuiz.getPercentCorrect()*100);
         //Set title that shows how many questions are in the Flashcards Collection
         quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
                                     "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+
                                     "\n Percent Correct: "+Integer.toString(perCorrect)+"%");
         //list is the ListView on this screen
+        progressBar.setProgress(perCorrect);
+        //Set percentage inside progress bar to right amount
+        percentage.setText(perCorrect+ "%");
+
         list = (ListView) findViewById(R.id.listView);
         //questionList is a List<> with the questions of this Flashcards Collection
         questionList = thisQuiz.getQuestions();

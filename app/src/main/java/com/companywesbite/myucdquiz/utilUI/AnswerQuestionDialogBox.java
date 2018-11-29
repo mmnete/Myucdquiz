@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -63,8 +64,10 @@ public class AnswerQuestionDialogBox {
         final Button closeButton = (Button) dialog.findViewById(R.id.closeButton);
         final Button nextButton = (Button) dialog.findViewById(R.id.nextButton);
         final Button prevButton = (Button) dialog.findViewById(R.id.prevButton);
+        final Button showAnswerButton = (Button) dialog.findViewById(R.id.showAnswerButton);
         final Button imageButton = (Button) dialog.findViewById(R.id.imageButton);
         final TextView currScore = (TextView) dialog.findViewById(R.id.currScore);
+
 
 
         imageButton.setEnabled(false);
@@ -84,6 +87,9 @@ public class AnswerQuestionDialogBox {
         });
 
         questionDescription.setText(thisQuestion.getDescription());
+        questionDescription.setMovementMethod(new ScrollingMovementMethod());
+        questionAnswer.setMovementMethod(new ScrollingMovementMethod());
+
         if(thisQuestion.isCorrect())
         {
             currScore.setText("ACCEPTED PREVIOUS ANSWER");
@@ -190,9 +196,19 @@ public class AnswerQuestionDialogBox {
         });
 
 
+        showAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionAnswer.setText(thisQuestion.getAnswer());
+            }
+        });
+
+
+
+
         dialog.show();
         Window window = dialog.getWindow();
-        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 1500);
 
     }
 

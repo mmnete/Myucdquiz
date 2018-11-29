@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class QuizMainPageFragment extends Fragment {
 
     private FloatingActionButton newQuizButton;
     private ListView lstview;
+    private TextView instruct;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
 
@@ -52,6 +55,15 @@ public class QuizMainPageFragment extends Fragment {
 
         context=getContext();
         lstview=(ListView)view.findViewById(R.id.quizList);
+        instruct = (TextView) view.findViewById(R.id.instruct);
+
+
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(200); //You can manage the time of the blink with this parameter
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(20);
+        instruct.startAnimation(anim);
 
 
 
@@ -147,7 +159,13 @@ public class QuizMainPageFragment extends Fragment {
 
         lstview.setAdapter(adapter);
         lstview.setEmptyView((TextView) view.findViewById(R.id.emptyElement));
-
+        if(quizes.size() > 0)
+        {
+            instruct.setVisibility(View.VISIBLE);
+        } else
+        {
+            instruct.setVisibility(View.INVISIBLE);
+        }
         lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Log.d("TAG",Integer.toString((int)quizes.get(position).getId()));
