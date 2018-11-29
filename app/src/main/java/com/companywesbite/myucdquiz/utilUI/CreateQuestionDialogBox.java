@@ -36,11 +36,14 @@ public class CreateQuestionDialogBox {
 
     private  Activity activity;
 
+    private DatabaseHelper db;
+
 
     public CreateQuestionDialogBox(long quizId, Context context)
     {
          this.quizId = quizId;
          this.context = context;
+         this.db = new DatabaseHelper(this.context);
     }
 
     public void showDialog(final Activity activity, String msg){
@@ -187,7 +190,7 @@ public class CreateQuestionDialogBox {
             return false;
         }
         question question1 = new question(questionName,questionDescription,questionAnswer,this.questionImage);
-        DatabaseHelper db = new DatabaseHelper(this.context);
+
         question1.setId(db.createQuestion(question1, quizId));
         this.thisQuiz = db.getQuiz(quizId);
         this.thisQuiz.addQuestion(question1);
