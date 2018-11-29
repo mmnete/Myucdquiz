@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EAEAEA"
-        tools:context=".SnapNotesFragment"
+        tools:context=".ImportQuizFragment"
         android:orientation="vertical">
 
     <LinearLayout
@@ -13,21 +13,22 @@
         android:layout_height="650dp"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/notesList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
-        </ListView>
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ALL SHARED OR IMPORTED QUIZES WILL HAVE NO IMAGES"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            />
 
-        <TextView android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/emptySnapList"
-            android:text="No Snap Notes Created"
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/importStatus"
+            android:text="IMPORT QUIZ NOW"
             android:textStyle="bold"
             android:textSize="30dp"
-            android:visibility="gone"
             android:layout_centerInParent="true"
             android:textColor="@android:color/darker_gray"
             android:textAlignment="center"
@@ -37,7 +38,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addSnapNote"
+        android:id="@+id/importQuizButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -45,7 +46,7 @@
         android:layout_gravity="end|bottom"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp"
-        android:src="@drawable/ic_add_white_24dp"
+        android:src="@drawable/downloads_icon_15"
         app:backgroundTint="@android:color/holo_green_dark" />
 
 

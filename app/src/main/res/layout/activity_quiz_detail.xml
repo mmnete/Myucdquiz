@@ -8,13 +8,7 @@
     android:padding="2dp"
     tools:context=".QuizDetailActivity">
 
-    <ImageView
-        android:id="@+id/quizImage"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        />
+
 
     <TextView
         android:id="@+id/descriptionTitle"
@@ -72,17 +66,31 @@
         android:background="@drawable/border_ui"
         android:dividerHeight="1dp" />
 
+
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addQuestion"
+        android:id="@+id/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp"
+        android:src="@drawable/menu12"
+        android:background="@android:color/transparent"
+        app:rippleColor="@android:color/darker_gray" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/menuButton"
+        android:layout_marginBottom="80dp"
         android:background="@color/colorPrimary"
         android:src="@drawable/ic_add_white_24dp"
         app:backgroundTint="@android:color/holo_green_dark"
+        android:visibility="invisible"
         app:rippleColor="@android:color/darker_gray" />
 
     <android.support.design.widget.FloatingActionButton
@@ -90,10 +98,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/addQuestion"
-        android:layout_marginBottom="80dp"
+        android:layout_alignStart="@+id/menuButton"
+        android:layout_marginBottom="145dp"
         android:src="@drawable/ic_edit_white_24dp"
         app:backgroundTint="@android:color/holo_orange_dark"
+        android:visibility="invisible"
         app:rippleColor="@android:color/darker_gray" />
 
     <android.support.design.widget.FloatingActionButton
@@ -101,11 +110,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/addQuestion"
-        android:layout_marginBottom="145dp"
+        android:layout_alignStart="@+id/menuButton"
+        android:layout_marginBottom="210dp"
         android:src="@drawable/baseline_delete_black_18dp"
         android:background="@android:color/transparent"
+        android:visibility="invisible"
         app:rippleColor="@android:color/darker_gray" />
+
+
 
 
 

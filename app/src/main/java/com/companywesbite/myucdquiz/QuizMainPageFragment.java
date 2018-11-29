@@ -163,13 +163,9 @@ public class QuizMainPageFragment extends Fragment {
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                               Intent i = new Intent(getActivity(),BluetoothSharingActivity.class);
+                               Intent i = new Intent(getActivity(),QuizSharingActivity.class);
                                 i.putExtra("quizJSON",quizes.get(position).toJSON());
                                 startActivity(i);
-
-
-
-
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

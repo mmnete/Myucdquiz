@@ -15,6 +15,17 @@
         android:layout_height="650dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/instruct"
+            android:text="HOLD TO DELETE | CLICK TO ANSWER"
+            android:textSize="15dp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/numQuestions"
+            android:visibility="invisible"
+            />
 
         <ListView
             android:id="@+id/quizList"

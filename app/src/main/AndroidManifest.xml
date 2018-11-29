@@ -7,7 +7,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -64,9 +68,8 @@
             android:name=".QuestionImageViewer"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BluetoothSharingActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".QuizSharingActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -78,16 +81,23 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".LoadQuizActivity"
+        <activity
+            android:name=".LoadQuizActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="content" android:mimeType="text/plain" android:host="*" />
-            </intent-filter>
 
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="*"
+                    android:mimeType="text/plain"
+                    android:scheme="content" />
+            </intent-filter>
         </activity>
+        <activity android:name=".SnapQuestionActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

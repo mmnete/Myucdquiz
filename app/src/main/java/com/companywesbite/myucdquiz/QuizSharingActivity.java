@@ -21,7 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
-public class BluetoothSharingActivity extends AppCompatActivity {
+public class QuizSharingActivity extends AppCompatActivity {
 
 
     String infoToShare = "";
@@ -78,7 +78,7 @@ public class BluetoothSharingActivity extends AppCompatActivity {
             // Should we show an explanation?
 
             Toast.makeText(this,"We need to write files, we cant share without that",Toast.LENGTH_LONG).show();
-            ActivityCompat.requestPermissions(BluetoothSharingActivity.this,
+            ActivityCompat.requestPermissions(QuizSharingActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE);
         } else
@@ -132,12 +132,14 @@ public class BluetoothSharingActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
 
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback for App ");
-            intent.putExtra(Intent.EXTRA_TEXT, "\n\n\n\n\nApp Version: \nAndroid Version:");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "A NEW QUIZ FILE ");
+            intent.putExtra(Intent.EXTRA_TEXT, "Note for the reciever: Please make sure you do not have a default app to open" +
+                    " attachments so that you can select FlashcardPro to open this file when you download it. Thank you for beliveing in "+
+                  "out product. \n\nFlashCardPro team.");
             if (screenshot != null) {
                 intent.putExtra(Intent.EXTRA_STREAM, screenshot);
             }
-            startActivity(Intent.createChooser(intent, "Send feedback..."));
+            startActivity(Intent.createChooser(intent, "Send quiz..."));
         }
     }
 

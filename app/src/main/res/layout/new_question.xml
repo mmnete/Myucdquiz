@@ -18,16 +18,28 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="5dp"
-        android:hint="Enter Question"
+        android:hint="Type Question"
         android:maxLines="4"
         android:scrollbars="vertical" />
+
+
 
     <EditText
         android:id="@+id/questionAnswer"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="5dp"
-        android:hint="Enter answer"
+        android:hint="Type answer"
+        android:maxLines="4"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/snapAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="OR SNAP QUESTION &amp; ANSWER INSTEAD?"
+        android:backgroundTint="@android:color/holo_green_light"
         android:maxLines="4"
         android:scrollbars="vertical" />
 
@@ -36,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="ADD IMAGE" />
+        android:text="ADD IMAGE [OPTIONAL]" />
 
     <Button
         android:id="@+id/cancelCreation"
@@ -54,6 +66,8 @@
         android:backgroundTint="@android:color/holo_green_light"
         android:elevation="0dp"
         android:text="ADD QUESTION" />
+
+
 
 
 </LinearLayout>

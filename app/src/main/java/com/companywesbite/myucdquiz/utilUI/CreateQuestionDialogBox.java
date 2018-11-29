@@ -9,12 +9,14 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.R;
+import com.companywesbite.myucdquiz.SnapQuestionActivity;
 import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
@@ -41,7 +43,7 @@ public class CreateQuestionDialogBox {
          this.context = context;
     }
 
-    public void showDialog(Activity activity, String msg){
+    public void showDialog(final Activity activity, String msg){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -54,6 +56,18 @@ public class CreateQuestionDialogBox {
         final EditText questionAnswer = (EditText) dialog.findViewById(R.id.questionAnswer);
         Button cancel = (Button) dialog.findViewById(R.id.cancelCreation);
         Button add = (Button) dialog.findViewById(R.id.createQuestion);
+        Button snapAnswer = (Button) dialog.findViewById(R.id.snapAnswer);
+
+
+        snapAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(activity, SnapQuestionActivity.class);
+                i.putExtra("quizId",quizId);
+                activity.startActivity(i);
+            }
+        });
+
          addImage = (Button) dialog.findViewById(R.id.addImage);
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +111,8 @@ public class CreateQuestionDialogBox {
         */
 
         dialog.show();
+        Window window = dialog.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
     }
 

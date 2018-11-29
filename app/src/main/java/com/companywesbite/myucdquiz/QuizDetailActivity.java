@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -49,7 +47,7 @@ public class QuizDetailActivity extends AppCompatActivity {
     private Button startQuiz;
     private FloatingActionButton addQuestion;
     private FloatingActionButton editQuiz;
-    private FloatingActionButton deleteButton;
+    private FloatingActionButton deleteButton, menuButton;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -57,6 +55,8 @@ public class QuizDetailActivity extends AppCompatActivity {
     private CreateQuestionDialogBox alert;
     private boolean deleted = false;
 
+
+    private boolean menuOpen = false;
 
 
     @Override
@@ -89,6 +89,7 @@ public class QuizDetailActivity extends AppCompatActivity {
          addQuestion = (FloatingActionButton) findViewById(R.id.addQuestion);
          editQuiz = (FloatingActionButton) findViewById(R.id.editQuizFloatingButton);
          deleteButton = (FloatingActionButton) findViewById(R.id.deleteQuizButton);
+         menuButton = (FloatingActionButton) findViewById(R.id.menuButton);
          deleteQuiz = (Button) findViewById(R.id.deleteQuiz);
          changeQuiz = (Button) findViewById(R.id.editQuiz);
          startQuiz = (Button) findViewById(R.id.takeQuiz);
@@ -141,6 +142,35 @@ public class QuizDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 delete();
+            }
+        });
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!menuOpen)
+                {
+                    addQuestion.setVisibility((View.VISIBLE));
+
+                    startQuiz.setVisibility((View.VISIBLE));
+
+                    editQuiz.setVisibility((View.VISIBLE));
+
+                    deleteButton.setVisibility((View.VISIBLE));
+                    menuOpen = true;
+                } else
+                {
+                    addQuestion.setVisibility((View.INVISIBLE));
+
+                    startQuiz.setVisibility((View.INVISIBLE));
+
+                    editQuiz.setVisibility((View.INVISIBLE));
+
+                    deleteButton.setVisibility((View.INVISIBLE));
+                    menuOpen = false;
+                }
+
             }
         });
 
