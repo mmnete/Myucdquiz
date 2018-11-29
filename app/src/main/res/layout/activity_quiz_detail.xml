@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:text="Quiz Description:"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textSize="20sp" />
 
     <TextView
@@ -31,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header"
+        android:layout_toLeftOf="@id/progressBar"
         android:maxLines="4"
         android:textSize="15dp" />
 
@@ -44,6 +45,21 @@
         android:paddingBottom="10dp"
         android:text="Questions"
         android:textSize="20dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circle_shape"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="65"
+        android:progressDrawable="@drawable/circular_progress_bar" />
 
     <TextView
         android:id="@+id/instruct"
@@ -63,7 +79,6 @@
         android:layout_below="@id/numQuestions"
         android:layout_alignParentStart="true"
         android:layout_weight="1"
-        android:background="@drawable/border_ui"
         android:dividerHeight="1dp" />
 
 
@@ -160,6 +175,18 @@
             android:textSize="20dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/percentage"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="45dp"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textAlignment="center" />
 
 
 </RelativeLayout>

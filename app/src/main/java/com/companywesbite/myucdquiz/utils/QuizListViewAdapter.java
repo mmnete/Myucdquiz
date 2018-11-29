@@ -59,15 +59,6 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         // Set text to each TextView of ListView item
         ViewHolder holder = (ViewHolder) rowView.getTag();
         holder.textview.setText(item_list.get(position).getName());
-        // for now we just this as the image but later we will display the image the user chose
-      /*  if(item_list.get(position).getQuizPictureFileName().equals("default"))
-        {
-            holder.imageView.setImageResource(R.drawable.defaultquizimage);
-        } else
-        {
-            holder.imageView.setImageBitmap(BitmapFactory.decodeFile(item_list.get(position).getQuizPictureFileName()));
-        }
-        */
 
         // PROGRESS BAR
         quizProgress = (int)(100*item_list.get(position).getPercentCorrect());
