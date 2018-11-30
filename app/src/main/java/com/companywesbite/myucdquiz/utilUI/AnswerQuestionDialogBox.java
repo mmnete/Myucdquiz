@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,7 @@ public class AnswerQuestionDialogBox {
         final Button showAnswerButton = (Button) dialog.findViewById(R.id.showAnswerButton);
         final Button imageButton = (Button) dialog.findViewById(R.id.imageButton);
         final TextView currScore = (TextView) dialog.findViewById(R.id.currScore);
+        final ImageView correctIcon = (ImageView) dialog.findViewById(R.id.correctIcon);
 
 
 
@@ -94,10 +96,12 @@ public class AnswerQuestionDialogBox {
 
         if(thisQuestion.isCorrect())
         {
-            currScore.setText("ACCEPTED PREVIOUS ANSWER");
+            currScore.setText("Accepted previous answer.");
+            correctIcon.setImageResource(R.drawable.ic_check_circle_green_24dp);
         } else
         {
-            currScore.setText("REJECTED PREVIOUS ANSWER");
+            currScore.setText("Rejected previous answer.");
+            correctIcon.setImageResource(R.drawable.ic_cancel_red_24dp);
         }
 
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -120,10 +124,13 @@ public class AnswerQuestionDialogBox {
                 questionDescription.setText(thisQuestion.getDescription());
                 if(thisQuestion.isCorrect())
                 {
-                    currScore.setText("ACCEPTED PREVIOUS ANSWER");
+                    currScore.setText("Accepted previous answer.");
+                    correctIcon.setImageResource(R.drawable.ic_check_circle_green_24dp);
+
                 } else
                 {
-                    currScore.setText("REJECTED PREVIOUS ANSWER");
+                    currScore.setText("Rejected previous answer.");
+                    correctIcon.setImageResource(R.drawable.ic_cancel_red_24dp);
                 }
             }
         });
@@ -140,10 +147,12 @@ public class AnswerQuestionDialogBox {
                 questionDescription.setText(thisQuestion.getDescription());
                 if(thisQuestion.isCorrect())
                 {
-                    currScore.setText("ACCEPTED PREVIOUS ANSWER");
+                    currScore.setText("Accepted previous answer.");
+                    correctIcon.setImageResource(R.drawable.ic_check_circle_green_24dp);
                 } else
                 {
-                    currScore.setText("REJECTED PREVIOUS ANSWER");
+                    currScore.setText("Rejected previous answer.");
+                    correctIcon.setImageResource(R.drawable.ic_cancel_red_24dp);
                 }
 
             }
@@ -185,10 +194,13 @@ public class AnswerQuestionDialogBox {
                     //Question is accepted
                     thisQuestion.setCorrect(1);
                     currScore.setText("ACCEPTED");
+                    correctIcon.setImageResource(R.drawable.ic_check_circle_green_24dp);
+
                 } else {
                     //Question is not accepted
                     thisQuestion.setCorrect(0);
                     currScore.setText("REJECTED");
+                    correctIcon.setImageResource(R.drawable.ic_cancel_red_24dp);
                 }
                 DatabaseHelper db = new DatabaseHelper(context);
                 db.updateQuestion(thisQuestion);
