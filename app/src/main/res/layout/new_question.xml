@@ -51,14 +51,6 @@
         android:text="Add Image (optional)" />
 
     <Button
-        android:id="@+id/cancelCreation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Cancel" />
-
-    <Button
         android:id="@+id/createQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,7 +59,13 @@
         android:elevation="0dp"
         android:text="ADD QUESTION" />
 
-
+    <Button
+        android:id="@+id/cancelCreation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Cancel" />
 
 
 </LinearLayout>

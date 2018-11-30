@@ -37,7 +37,6 @@ public class QuizMainPageFragment extends Fragment {
     Context context;
 
     private FloatingActionButton newQuizButton;
-    private FloatingActionButton importQuizButton;
     private ListView lstview;
     private TextView instruct;
 
@@ -60,7 +59,6 @@ public class QuizMainPageFragment extends Fragment {
 
         // creating a new quiz.
         newQuizButton = (FloatingActionButton) view.findViewById(R.id.addQuizButton);
-        importQuizButton = (FloatingActionButton) view.findViewById(R.id.importQuizButton);
         newQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,12 +66,7 @@ public class QuizMainPageFragment extends Fragment {
                 startActivity(i);
             }
         });
-        importQuizButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Enter ...
-            }
-        });
+
 
 
 

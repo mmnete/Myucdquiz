@@ -61,19 +61,5 @@
         android:src="@drawable/ic_add_white_24dp"
         app:backgroundTint="@android:color/holo_green_dark" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/importQuizButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/addQuizButton"
-        android:layout_gravity="end|bottom"
-        android:layout_marginBottom="81dp"
-        android:src="@drawable/ic_input_black_24dp"
-        app:backgroundTint="@color/colorPrimary" />
-
-
-
-
 
 </RelativeLayout>
