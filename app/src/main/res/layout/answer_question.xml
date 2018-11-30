@@ -7,27 +7,17 @@
 
 
     <TextView
-        android:id="@+id/questionHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:text="Question:"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/questionDescription"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_margin="5dp"
-        android:scrollbars="vertical"
-
-        android:scrollbarStyle="insideOverlay"
+        android:layout_weight="1"
         android:fadeScrollbars="true"
+
         android:fadingEdge="vertical"
-        android:textSize="12sp" />
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/questionAnswer"
@@ -56,32 +46,6 @@
         android:textStyle="bold"
         android:text="SHAKE PHONE TO SUBMIT"/>
 
-    <Button
-        android:id="@+id/imageButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="NO IMAGE" />
-
-    <Button
-        android:id="@+id/closeButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="EXIT QUIZ" />
-
-    <Button
-        android:id="@+id/showAnswerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:text="SHOW ANSWER" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,6 +68,34 @@
             android:elevation="0dp"
             android:text="NEXT" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/imageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="NO IMAGE" />
+
+
+    <Button
+        android:id="@+id/showAnswerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="SHOW ANSWER" />
+
+
+    <Button
+        android:id="@+id/closeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="EXIT" />
 
     <!--<Button-->
         <!--android:id="@+id/nextButton"-->

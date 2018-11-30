@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_margin="5dp"
-        android:hint="Enter Card Title"
+        android:hint="Enter Card Title (optional)"
         android:maxLines="1" />
 
     <EditText
@@ -38,17 +38,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="OR SNAP QUESTION &amp; ANSWER INSTEAD?"
-        android:backgroundTint="@android:color/holo_green_light"
+        android:backgroundTint="@color/common_action_bar_splitter"
         android:maxLines="4"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:text="Snap question or answer" />
 
     <Button
         android:id="@+id/addImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="ADD IMAGE [OPTIONAL]" />
+        android:text="Add Image (optional)" />
 
     <Button
         android:id="@+id/cancelCreation"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:backgroundTint="@color/colorPrimary"
-        android:text="CANCEL" />
+        android:text="Cancel" />
 
     <Button
         android:id="@+id/createQuestion"
