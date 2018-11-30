@@ -57,16 +57,6 @@ public class QuizMainPageFragment extends Fragment {
         lstview=(ListView)view.findViewById(R.id.quizList);
         instruct = (TextView) view.findViewById(R.id.instruct);
 
-
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(200); //You can manage the time of the blink with this parameter
-        anim.setStartOffset(20);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(20);
-        instruct.startAnimation(anim);
-
-
-
         // creating a new quiz.
         newQuizButton = (FloatingActionButton) view.findViewById(R.id.addQuizButton);
         newQuizButton.setOnClickListener(new View.OnClickListener() {
