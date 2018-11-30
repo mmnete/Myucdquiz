@@ -132,6 +132,20 @@ public class quiz {
         return out/currQuestions.size();
     }
 
+    public int questionsLeft(){
+        int out = 0;
+        List<question> currQuestions = getQuestions();
+        for(int i = 0; i < currQuestions.size(); i++)
+        {
+            if(currQuestions.get(i).isCorrect())
+            {
+                out++;
+            }
+        }
+
+        return currQuestions.size()-out;
+    }
+
     public String toJSON(){
 
         JSONObject jsonObject= new JSONObject();

@@ -37,6 +37,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
     // Hold views of the ListView to improve its scrolling performance
     static class ViewHolder {
         public TextView textview;
+        public TextView description;
         public Button button;
         public ImageView imageView;
         public ProgressBar progressBar;
@@ -54,14 +55,19 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
             viewHolder.imageView = (ImageView) rowView.findViewById(R.id.quizImage);
             viewHolder.progressBar = (ProgressBar) rowView.findViewById(R.id.quizProgressBar);
             viewHolder.button= (Button) rowView.findViewById(R.id.openQuizButton);
+            viewHolder.description = (TextView) rowView.findViewById(R.id.quizDescription);
             rowView.setTag(viewHolder);
         }
         // Set text to each TextView of ListView item
         ViewHolder holder = (ViewHolder) rowView.getTag();
         holder.textview.setText(item_list.get(position).getName());
 
-        // PROGRESS BAR
         quizProgress = (int)(100*item_list.get(position).getPercentCorrect());
+        // Set text of description
+
+        holder.description.setText(item_list.get(position).questionsLeft() + " questions left");
+
+        // PROGRESS BAR
         holder.progressBar.setProgress(quizProgress);
 
         // holder.imageView.setImageResource(R.drawable.defaultquizimage);

@@ -219,10 +219,10 @@ public class ImportQuizFragment extends Fragment {
                         newQuiz.addQuestion(temp);
                         db.updateQuiz(newQuiz);
                     }
-                    importStatus.setText("QUIZ RECIEVED :-)");
+                    importStatus.setText("Quiz received.");
                 } else
                 {
-                    importStatus.setText("COULDNT LOAD FILE :-(");
+                    importStatus.setText("Error. Couldn't load file.");
                 }
 
             } catch (IOException e) {
