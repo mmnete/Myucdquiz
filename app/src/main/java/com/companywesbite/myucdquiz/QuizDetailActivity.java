@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
+import com.companywesbite.myucdquiz.utilUI.AnswerQuestionDialogBox;
 import com.companywesbite.myucdquiz.utilUI.CreateQuestionDialogBox;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import com.companywesbite.myucdquiz.utils.ONGOINGQuestionListViewAdapter;
@@ -46,11 +47,13 @@ public class QuizDetailActivity extends AppCompatActivity {
     private Button deleteQuiz;
     private Button changeQuiz;
     private Button startQuiz;
+    private Button shuffleButton;
     private FloatingActionButton addQuestion;
     private FloatingActionButton editQuiz;
     private FloatingActionButton deleteButton, menuButton;
     private TextView percentage;
     private ProgressBar progressBar;
+    private AnswerQuestionDialogBox dialogBox;
 
     private static final int MY_PERMISSIONS_REQUEST_GET_IMAGE = 1000;
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -87,8 +90,8 @@ public class QuizDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
 
-         quizDescription = (TextView) findViewById(R.id.quizDescription);
-         quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
+        quizDescription = (TextView) findViewById(R.id.quizDescription);
+        quizNumQuestions = (TextView) findViewById(R.id.numQuestions);
          addQuestion = (FloatingActionButton) findViewById(R.id.addQuestion);
          editQuiz = (FloatingActionButton) findViewById(R.id.editQuizFloatingButton);
          deleteButton = (FloatingActionButton) findViewById(R.id.deleteQuizButton);
@@ -98,16 +101,8 @@ public class QuizDetailActivity extends AppCompatActivity {
          startQuiz = (Button) findViewById(R.id.takeQuiz);
          percentage = (TextView) findViewById(R.id.percentage);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        shuffleButton = (Button) findViewById(R.id.shuffleButton);
 
-         // blinking text
-        TextView myText = (TextView) findViewById(R.id.instruct);
-
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(200); //You can manage the time of the blink with this parameter
-        anim.setStartOffset(20);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(20);
-        myText.startAnimation(anim);
 
          //update the quiz table
         updateQuizTable();
@@ -140,6 +135,13 @@ public class QuizDetailActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), OngoingQuizActivity.class);
                 i.putExtra("quizId", quizId);
                 startActivity(i);
+            }
+        });
+
+        shuffleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.startRandomQuiz();
             }
         });
 
@@ -218,8 +220,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         int perCorrect = (int) (thisQuiz.getPercentCorrect()*100);
         //Set title that shows how many questions are in the Flashcards Collection
         quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
-                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+
-                                    "\n Percent Correct: "+Integer.toString(perCorrect)+"%");
+                                    "\nError Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance()) +"%");
         //list is the ListView on this screen
         progressBar.setProgress(perCorrect);
         //Set percentage inside progress bar to right amount
@@ -252,10 +253,8 @@ public class QuizDetailActivity extends AppCompatActivity {
         quizDescription.setText(thisQuiz.getDescription());
         int perCorrect = (int) thisQuiz.getPercentCorrect();
         quizNumQuestions.setText("Questions: "+Integer.toString(thisQuiz.getQuestionNumber())+
-                                    "\n Error Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+
-                                    "\n Percent Correct: "+Integer.toString(perCorrect)+"%");
+                                    "\nError Tolerance: "+Integer.toString(thisQuiz.getErrorTolerance())+"%");
     }
-
 
     // when the user clicks the back button .. we cannot let the user come back here
     // This is for the back button
@@ -266,8 +265,6 @@ public class QuizDetailActivity extends AppCompatActivity {
         finish();
         return true;
     }
-
-
 
     // Do we have permission to read from images though....
     // Ask for permission to read images unless close the application
@@ -329,7 +326,7 @@ public class QuizDetailActivity extends AppCompatActivity {
 
             //quizImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             this.alert.questionImage = picturePath;
-            this.alert.addImage.setText("IMAGE SELECTED!");
+            this.alert.addImage.setText("Image selected");
 
         }
     }
@@ -340,7 +337,7 @@ public class QuizDetailActivity extends AppCompatActivity {
         deleted = true;
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         db.deleteQuiz(thisQuiz.getId());
-        Toast.makeText(getApplicationContext(),"Quiz Deleted!",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Flashcards Collection Deleted!",Toast.LENGTH_LONG).show();
         finish();
     }
 

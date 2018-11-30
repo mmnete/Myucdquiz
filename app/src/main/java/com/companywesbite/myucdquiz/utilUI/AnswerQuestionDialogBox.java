@@ -35,6 +35,7 @@ public class AnswerQuestionDialogBox {
     private int pos;
     private List<question> col;
 
+
     private ShakeListener mShaker;
     private boolean displaying = false;
 
@@ -50,6 +51,7 @@ public class AnswerQuestionDialogBox {
         this.col = col;
         this.thisQuiz = thisQuiz;
     }
+
 
     public void showDialog(Activity activity){
         displaying = true;

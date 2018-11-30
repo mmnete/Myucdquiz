@@ -17,6 +17,8 @@ import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utilUI.AnswerQuestionDialogBox;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
@@ -126,6 +128,16 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
 
         return view;
     }
+
+    // Shuffle mode
+    public void startRandomQuiz(){
+        // Shuffle the arrayList
+        Collections.shuffle(arraylist);
+        // Hand it over to a newly created dialog box
+        dialogBox = new AnswerQuestionDialogBox(arraylist.get(0),arraylist,0,mContext, thisQuiz);
+        dialogBox.showDialog(activity);
+    }
+
 
 
 }
