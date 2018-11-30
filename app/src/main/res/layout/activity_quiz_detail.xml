@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/activity_quiz_detail"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:padding="2dp"
     tools:context=".QuizDetailActivity">
 
@@ -92,8 +93,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp"
-        android:src="@drawable/menu12"
         android:background="@android:color/transparent"
+        android:src="@drawable/ic_menu_black_24dp"
+        app:backgroundTint="@color/colorPrimary"
         app:rippleColor="@android:color/darker_gray" />
 
 

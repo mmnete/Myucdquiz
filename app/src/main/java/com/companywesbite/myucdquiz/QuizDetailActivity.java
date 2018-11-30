@@ -158,32 +158,39 @@ public class QuizDetailActivity extends AppCompatActivity {
 
                 if(!menuOpen)
                 {
-                    addQuestion.setVisibility((View.VISIBLE));
-
-                    startQuiz.setVisibility((View.VISIBLE));
-
-                    editQuiz.setVisibility((View.VISIBLE));
-
-                    deleteButton.setVisibility((View.VISIBLE));
-                    menuOpen = true;
+                    makeButtonsVisible();
                 } else
                 {
-                    addQuestion.setVisibility((View.INVISIBLE));
-
-                    startQuiz.setVisibility((View.INVISIBLE));
-
-                    editQuiz.setVisibility((View.INVISIBLE));
-
-                    deleteButton.setVisibility((View.INVISIBLE));
-                    menuOpen = false;
+                    makeButtonsInvisible();
                 }
 
             }
         });
-
-
-
     }
+
+    private void makeButtonsInvisible(){
+        addQuestion.setVisibility((View.INVISIBLE));
+
+        startQuiz.setVisibility((View.INVISIBLE));
+
+        editQuiz.setVisibility((View.INVISIBLE));
+
+        deleteButton.setVisibility((View.INVISIBLE));
+        menuOpen = false;
+    }
+
+    private void makeButtonsVisible(){
+        addQuestion.setVisibility((View.VISIBLE));
+
+        startQuiz.setVisibility((View.VISIBLE));
+
+        editQuiz.setVisibility((View.VISIBLE));
+
+        deleteButton.setVisibility((View.VISIBLE));
+        menuOpen = true;
+    }
+
+
 
     private void createQuestion()
     {
@@ -199,6 +206,8 @@ public class QuizDetailActivity extends AppCompatActivity {
         {
             updateQuizTable();
         }
+        // When the focus changes (e.g. to a new fragment), the three FloatingActionbuttons should disappear
+        if (menuOpen) makeButtonsInvisible();
     }
 
     @Override
