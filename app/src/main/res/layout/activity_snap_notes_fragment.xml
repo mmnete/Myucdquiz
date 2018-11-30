@@ -13,26 +13,26 @@
         android:layout_height="650dp"
         android:orientation="vertical">
 
-        <TextView android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ALL SHARED OR IMPORTED QUIZES WILL HAVE NO IMAGES"
-            android:textStyle="bold"
-            android:textSize="12dp"
-            android:layout_centerInParent="true"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            />
-
-        <TextView android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
             android:id="@+id/importStatus"
-            android:text="IMPORT QUIZ NOW"
-            android:textStyle="bold"
-            android:textSize="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@android:color/darker_gray"
+            android:text="Import Flashcards Collection"
             android:textAlignment="center"
-            />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="All shared and imported quizes will have no images."
+            android:textAlignment="center"
+            android:textColor="@color/common_plus_signin_btn_text_light_default"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -46,7 +46,7 @@
         android:layout_gravity="end|bottom"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp"
-        android:src="@drawable/downloads_icon_15"
+        android:src="@drawable/ic_input_black_24dp"
         app:backgroundTint="@android:color/holo_green_dark" />
 
 
