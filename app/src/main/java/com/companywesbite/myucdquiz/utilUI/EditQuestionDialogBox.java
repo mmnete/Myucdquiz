@@ -13,6 +13,27 @@ import com.companywesbite.myucdquiz.R;
 import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 
+
+/***
+ *
+ *
+ * No Longer used....
+ * The reason is because the user can simply create a new question instead
+ * And it will take the same duration as filling this form
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-30
+ * Name: EditQuestionDialogBox
+ * Functionality: This is our own custom dialog box that pops up as an input when the user wants to make changes
+ *                 to a specific question in a quiz...
+ *
+ *
+ *
+ *
+ */
+
+
+
 public class EditQuestionDialogBox {
 
     private long questionId;

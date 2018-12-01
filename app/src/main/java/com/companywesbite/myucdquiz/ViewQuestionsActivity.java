@@ -16,6 +16,22 @@ import com.companywesbite.myucdquiz.utils.QuestionListViewAdapter;
 
 import java.util.List;
 
+
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  ViewQuestionsActivity
+ * Functionality: Shows list of questions associated with a quiz
+ *                Uses the QuestionListViewAdapter
+ *
+ *
+ */
+
+
+
 public class ViewQuestionsActivity extends AppCompatActivity  {
 
 
@@ -64,9 +80,8 @@ public class ViewQuestionsActivity extends AppCompatActivity  {
     // when the user clicks the back button .. we cannot let the user come back here
     // This is for the back button
     public boolean onOptionsItemSelected(MenuItem item){
-       /* Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(myIntent);
-        */
         finish();
         return true;
     }

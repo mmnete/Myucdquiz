@@ -22,6 +22,26 @@ import com.companywesbite.myucdquiz.utils.ONGOINGQuestionListViewAdapter;
 
 import java.util.List;
 
+
+/***
+ *
+ *  NO LONGER IN USE!!
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name: OngoingQuizActivity
+ * Functionality: This activity was accessed from quizdetailactivity and was intended to display
+ *                all the questions and also have an alert box.
+ *                The use of this activity was replaced by a lightweight alertbox to reduce computation time
+ *                and unnecessary space use.
+ *                The new answer question dialog box does more than what this activity was able to do and
+ *                is much faster and more user friendly.
+ *
+ *
+ */
+
+
+
 public class OngoingQuizActivity extends AppCompatActivity{
 
 
@@ -34,6 +54,7 @@ public class OngoingQuizActivity extends AppCompatActivity{
     private ONGOINGQuestionListViewAdapter adapter;
     private List<question> questionList;
     private NotificationManager mNotificationManager;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +67,7 @@ public class OngoingQuizActivity extends AppCompatActivity{
         quizId = i.getLongExtra("quizId", 1000);
 
         // now let us get our quiz
-        DatabaseHelper db = new DatabaseHelper(this);
+        db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz((long)quizId);
         questions = thisQuiz.getQuestions();
 
@@ -55,7 +76,7 @@ public class OngoingQuizActivity extends AppCompatActivity{
         getSupportActionBar().setTitle(thisQuiz.getName() + " (ON-GOING)");
         list = (ListView) findViewById(R.id.listView);
         questionList = thisQuiz.getQuestions();
-        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList,quizId);
+        adapter = new ONGOINGQuestionListViewAdapter(this,this,questionList,thisQuiz, db);
         list.setAdapter(adapter);
     }
 

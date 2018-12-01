@@ -28,6 +28,24 @@ import com.companywesbite.myucdquiz.utils.ShakeListener;
 import java.util.List;
 
 
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-30
+ * Name: AnswerQuestionDialogBox
+ * Functionality: This is our own custom dialog box that pops up as an input when the user wants to answer
+ *                a question.
+ *                It is used in the quizdetailactivity and takes in a question and a quiz as inputs
+ *                When the user takes an answer then the changes are propagated to the sqllite database
+ *                using the databasehelper object.
+ *                It also uses the shakeClass to detect if a shake is done.
+ *
+ *
+ *
+ */
+
+
+
 public class AnswerQuestionDialogBox {
 
     private long questionId;
@@ -37,12 +55,13 @@ public class AnswerQuestionDialogBox {
     private List<question> col;
 
 
-    private ShakeListener mShaker;
+    private ShakeListener shakeListener;
     private boolean displaying = false;
 
     private quiz thisQuiz;
 
 
+    // constructor
     public AnswerQuestionDialogBox(question question, List<question> col, int pos, Context context, quiz thisQuiz)
     {
         this.thisQuestion = question;
@@ -54,6 +73,8 @@ public class AnswerQuestionDialogBox {
     }
 
 
+    // set up the values given the question to display and display the UI
+    // listen for when a user vibrates the phone to start the answer function
     public void showDialog(Activity activity){
         displaying = true;
         final Dialog dialog = new Dialog(activity);
@@ -158,8 +179,8 @@ public class AnswerQuestionDialogBox {
             }
         });
 
-        mShaker = new ShakeListener(this.context);
-        mShaker.setOnShakeListener(new ShakeListener.OnShakeListener () {
+        shakeListener = new ShakeListener(this.context);
+        shakeListener.setOnShakeListener(new ShakeListener.OnShakeListener () {
             public void onShake()
             {
 

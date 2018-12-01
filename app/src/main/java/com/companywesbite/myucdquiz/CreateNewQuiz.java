@@ -19,6 +19,23 @@ import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import java.util.HashMap;
 import java.util.Map;
 
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name: CreateNewQuiz
+ * Functionality: It is the activity that gets called from the
+ *                quizmainpagefragment that just allows the user to create a new quiz
+ *                All the changes are propagated to the sqllite database using the databasehelper object
+ *                It also has an object for error tolerance
+ *                The error tolerance allows us to set the degree in which the
+ *                similarity between the user answer and the actual answer should be compared on
+ *                some answers should be exact while other should just be very close.
+ *
+ */
+
+
+
 public class CreateNewQuiz extends AppCompatActivity {
 
 

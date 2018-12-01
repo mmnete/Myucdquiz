@@ -12,12 +12,14 @@ import android.support.design.widget.TabLayout;
 import android.widget.Toast;
 
 
-/*********
- * This is the class that displays the items with the numbers
- * Those will be transformed to the different quizes the user has saved
- * We can simply query information from the database and display them in this listview
- * Each item has a button so that the user can press to view the quiz and do all other stuff
- * There is another button to take a quiz.
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name: MainActivity
+ * Functionality: It is a one time use activity that gets loaded after the splashscreen activity
+ *                It contains the three main fragments and contains an ask for permission method.
+ *
  *
  */
 

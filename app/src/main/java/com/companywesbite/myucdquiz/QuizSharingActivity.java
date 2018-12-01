@@ -21,6 +21,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  QuizSharingActivity
+ * Functionality: This fragment was accessed from the quizmainpagefragment
+ *                It has only one task and that is to create the json string and create a file
+ *                the file is then shared through the email app of the user choice.
+ *
+ *
+ */
+
+
+
 public class QuizSharingActivity extends AppCompatActivity {
 
 

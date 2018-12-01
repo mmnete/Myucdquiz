@@ -17,6 +17,25 @@ import com.companywesbite.myucdquiz.questionClasses.quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-30
+ * Name: QuestionListViewAdapter
+ * Functionality: This is a class is the one responsible for displaying the question list in the
+ *                viewquestionsactivity - it contains a simple view method for displaying all the
+ *                questions in a specific quiz and a simple x button to delete the question from the quiz
+ *
+ *                It rans this methods using the Database helper class.
+ *
+ *
+ *
+ *
+ */
+
+
+
 public class QuestionListViewAdapter extends ArrayAdapter<question> {
 
     int groupid;

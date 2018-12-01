@@ -3,6 +3,24 @@ package com.companywesbite.myucdquiz.questionClasses;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-01
+ * Name: question
+ * Functionality: This is a class that is a blue print of what a question is.
+ *                It contains all the getters and setters of what a question is in our project.
+ *                What should a question have?
+ *                A question should contain an id, title [optionally used], description, answer
+ *                isAnswered function, isCorrect function, a path to a picture [optionally used].
+ *
+ *                The question also contains a method to construct it to and from a json string so
+ *                that we can easily create new objects when a quiz [a question collection] is being shared
+ *
+ */
+
+
 public class question {
 
     // What defines a question
@@ -27,6 +45,7 @@ public class question {
         this.picturePath = picturePath;
     }
 
+
     public question(String title, String description, String answer, String picturePath)
     {
         this.id = 10;
@@ -37,6 +56,7 @@ public class question {
         this.correct = 0;
         this.picturePath = picturePath;
     }
+
 
     public long getId() {
         return id;
@@ -112,6 +132,8 @@ public class question {
         return  getAnswered() == 1;
     }
 
+
+    // Used when we want to share or recieve a quiz [ question collection ] through email or import
     public JSONObject toJSON(){
 
         JSONObject jsonObject= new JSONObject();

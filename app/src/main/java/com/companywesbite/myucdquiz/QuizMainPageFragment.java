@@ -17,8 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +27,25 @@ import com.companywesbite.myucdquiz.utils.QuizListViewAdapter;
 
 import java.net.URI;
 import java.util.List;
+
+
+
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  QuizMainPageFragment
+ * Functionality: This fragment was accessed from the mainactivity
+ *                This fragment has a listview of all the quizes in the database
+ *                The user can also add a new quiz by navigating to the createnewquiz activity by clicking a button
+ *                The listview also has a onlongpress to allow user to share quiz
+ *                When the user clicks on a quiz the quizdeilactivty gets started..
+ *
+ *
+ */
+
 
 public class QuizMainPageFragment extends Fragment {
 

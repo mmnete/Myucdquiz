@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,6 +15,21 @@ import com.companywesbite.myucdquiz.questionClasses.quiz;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-30
+ * Name: QuizListViewAdapter
+ * Functionality: This is a class is the one responsible for displaying the quiz list in the first
+ *                page of the application. It displays every quiz name and how much of it is done
+ *                It also helps the user understand the progress of each quiz using a progressbar UI
+ *
+ *
+ *
+ */
+
 
 public class QuizListViewAdapter extends ArrayAdapter<quiz> {
 
@@ -71,6 +85,8 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
         holder.progressBar.setProgress(quizProgress);
 
         // holder.imageView.setImageResource(R.drawable.defaultquizimage);
+
+        /*
         holder.button.setText("OPEN");
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +94,7 @@ public class QuizListViewAdapter extends ArrayAdapter<quiz> {
                 ((ListView) parent).performItemClick(v, position, 0);
             }
         });
-
+        */
 
         return rowView;
     }

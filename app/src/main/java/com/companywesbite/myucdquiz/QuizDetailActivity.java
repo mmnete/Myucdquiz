@@ -13,8 +13,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -29,6 +27,29 @@ import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import com.companywesbite.myucdquiz.utils.ONGOINGQuestionListViewAdapter;
 
 import java.util.List;
+
+
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  QuizDetailActivity
+ * Functionality: This activity was accessed from the quizmainpagefragment
+ *                It shows all the necessary details of a quiz using a nice UI
+ *                It allows the user to add a question or make changes on the quiz jusing floating action buttons
+ *                It allows the user to start answering questions by loading up the lightweight answerquestion alert box
+ *                When a question is clicked
+ *
+ *                It also contains shuffle functionality to start the answer question alert box from any question.
+ *
+ *                It uses the database object to fetch all this information.
+ *
+ *
+ */
+
+
 
 public class QuizDetailActivity extends AppCompatActivity {
 
@@ -64,6 +85,8 @@ public class QuizDetailActivity extends AppCompatActivity {
 
     private boolean menuOpen = false;
 
+    private DatabaseHelper db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +101,8 @@ public class QuizDetailActivity extends AppCompatActivity {
        // Log.d("TAG","Recieved"+)
 
         // now let us get our quiz
-        DatabaseHelper db = new DatabaseHelper(this);
+         db = new DatabaseHelper(this);
+
         thisQuiz = db.getQuiz(quizId);
 
      //Log.d("TAG",Double.toString(thisQuiz.getErrorTolerance()));
@@ -141,7 +165,10 @@ public class QuizDetailActivity extends AppCompatActivity {
         shuffleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.startRandomQuiz();
+                if(questionList.size() > 0)
+                {
+                    adapter.startRandomQuiz();
+                }
             }
         });
 
@@ -198,7 +225,8 @@ public class QuizDetailActivity extends AppCompatActivity {
         alert.showDialog(this, "New Question");
     }
 
-
+    // This is done to update any changes made when the activity comes into view
+    // Like when an answer is submitted or when a question is deleted
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
         // Update the quiz table
@@ -223,8 +251,8 @@ public class QuizDetailActivity extends AppCompatActivity {
 
     public void updateQuizTable(){
 
-        DatabaseHelper db2 = new DatabaseHelper(this);
-        thisQuiz = db2.getQuiz((long)quizId);
+
+        thisQuiz = db.getQuiz(quizId);
         questions = thisQuiz.getQuestions();
         int perCorrect = (int) (thisQuiz.getPercentCorrect()*100);
         //Set title that shows how many questions are in the Flashcards Collection
@@ -249,7 +277,7 @@ public class QuizDetailActivity extends AppCompatActivity {
                 questions.get(i).setCorrect(0);
             }
            // db2.updateQuestion(questions.get(i));
-            adapter = new ONGOINGQuestionListViewAdapter(this, this, questionList, quizId);
+            adapter = new ONGOINGQuestionListViewAdapter(this, this, questionList, thisQuiz, db);
             list.setAdapter(adapter);
         }
     }
@@ -257,7 +285,6 @@ public class QuizDetailActivity extends AppCompatActivity {
     private void makeDisplay()
     {
         // now let us get our quiz
-        DatabaseHelper db = new DatabaseHelper(this);
         thisQuiz = db.getQuiz(quizId);
         quizDescription.setText(thisQuiz.getDescription());
         int perCorrect = (int) thisQuiz.getPercentCorrect();
@@ -344,7 +371,6 @@ public class QuizDetailActivity extends AppCompatActivity {
     private void delete()
     {
         deleted = true;
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         db.deleteQuiz(thisQuiz.getId());
         Toast.makeText(getApplicationContext(),"Flashcards Collection Deleted!",Toast.LENGTH_LONG).show();
         finish();

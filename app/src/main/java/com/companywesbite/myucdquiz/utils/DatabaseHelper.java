@@ -16,16 +16,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Android Group team.
- * This is the class that creates all the tables for our database.
+/***
  *
- * */
+ * Team: Flashcards Pro
+ * Date: 2018-11-25
+ * Name: DatabaseHelper
+ * Functionality: This is a class is the one that handles all the sqllite operations in the project
+ *                It contains all the information on the all the three tables we have built and use
+ *
+ *                The question table stores all the information about each question
+ *                The quiz table stores all the information about each quiz
+ *                The question_quiz table store info that shows the relation between question and quiz
+ *
+ *                Operations possible are:
+ *                CRUD operations on questions
+ *                CRUD operations on quizes
+ *                These are also run using the question_quiz table if needed
+ *
+ */
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // Logcat tag
+
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
@@ -40,7 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_QUIZ_QUESTION = "TBquizquestion"; // How we know which quiz a question belongs to
     private static final String TABLE_NOTE = "TBnotes"; // How we know which quiz a question belongs to
 
-    // Common column names. This column is in all the three tables.
+    // Common column names. These are all the columns used in all the quizes
     private static final String KEY_ID = "id";
 
     // QUIZ Table - column names.
@@ -59,7 +72,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String QUESTION_CURR_SCORE = "question_curr_score";
     private static final String QUESTION_IMAGE_DIRECTORY = "question_image_directory";
 
-    // NOTES Table - column names
+    /***
+     * This table is no longer used in the application!!!!!!
+     */
     private static final String NOTE_NAME = "note_name";
     private static final String NOTE_DESCRIPTION = "note_description";
 
@@ -67,26 +82,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_QUIZ_ID = "key_quiz_id";
     private static final String KEY_QUESTION_ID = "key_question_id";
 
-    // Table Create Statements
-    // Todo table create statement
+    // Creating the table quiz
     private static final String CREATE_TABLE_QUIZ = "CREATE TABLE "
             + TABLE_QUIZ + "(" + KEY_ID + " INTEGER PRIMARY KEY," + QUIZ_NAME
             + " TEXT," + QUIZ_DESCRIPTION + " TEXT," + QUIZ_NUM_OF_QUES + " INTEGER," + QUIZ_GRADE
             + " INTEGER," + QUIZ_TOLERANCE + " INTEGER" + ")";
 
-    // Tag table create statement
+    // Creating the table questions
     private static final String CREATE_TABLE_QUESTION = "CREATE TABLE " + TABLE_QUESTION
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + QUESTION_NAME
             + " TEXT," + QUESTION_DESCRIPTION + " TEXT," + QUESTION_ANSWER
             + " TEXT," + QUESTION_ANSWERED + " BOOLEAN," + QUESTION_CURR_SCORE + " DOUBLE," + QUESTION_CORRECT
             + " BOOLEAN," + QUESTION_IMAGE_DIRECTORY + " TEXT"  + ")";
 
-    // todo_tag table create statement
-    private static final String CREATE_TABLE_TODO_TAG = "CREATE TABLE "
+    // Creating the table quiz question
+    private static final String CREATE_TABLE_QUIZ_QUESTION = "CREATE TABLE "
             + TABLE_QUIZ_QUESTION + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
             + KEY_QUIZ_ID + " INTEGER," + KEY_QUESTION_ID + " INTEGER)";
 
-    // note table create statement
+    /**
+     * This query is no longer ran!!!!
+     */
     private static final String CREATE_TABLE_NOTE = "CREATE TABLE "
             + TABLE_NOTE + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
             + NOTE_NAME + " TEXT," + NOTE_DESCRIPTION + " TEXT)";
@@ -101,7 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // creating required tables
         db.execSQL(CREATE_TABLE_QUIZ);
         db.execSQL(CREATE_TABLE_QUESTION);
-        db.execSQL(CREATE_TABLE_TODO_TAG);
+        db.execSQL(CREATE_TABLE_QUIZ_QUESTION);
         db.execSQL(CREATE_TABLE_NOTE);
     }
 
@@ -377,9 +393,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    /*
-     * Creating a Note
-     */
+    /**
+     * No Longer used !!!!
+     * */
     public long createNote(note note) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -396,9 +412,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return note_id;
     }
 
-    /*
-     * get single note
-     */
+    /**
+     * No Longer used !!!!
+     * */
     public note getNote(long note_id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -426,9 +442,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    /*
-     * Updating a note
-     */
+    /**
+     * No Longer used !!!!
+     * */
     public int updateNote(note note ) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -444,9 +460,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    /*
-     * Deleting a note
-     */
+    /**
+     * No Longer used !!!!
+     * */
     public void deleteNote(long note_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NOTE, KEY_ID + " = ?",
@@ -455,7 +471,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
-     * Fetching all the saved notes
+     * No Longer used !!!!
      * */
     public List<note> getAllNotes() {
         List<note> notes = new ArrayList<note>();

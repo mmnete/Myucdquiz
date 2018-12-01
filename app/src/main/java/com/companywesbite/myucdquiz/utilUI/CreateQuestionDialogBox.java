@@ -21,6 +21,25 @@ import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-30
+ * Name: CreateQuestionDialogBox
+ * Functionality: This is our own custom dialog box that pops up as an input when the user wants to create
+ *                a question, it shows up in the quizdetailactivity as well and takes is as an input
+ *                the current quiz and uses the database object to create the new question.
+ *                This dialog box also redirects to the SnapQuestion activity so that the user
+ *                can create a question using the camera instead of text.
+ *
+ *
+ *
+ *
+ */
+
+
+
 public class CreateQuestionDialogBox {
 
     private long quizId;
@@ -174,22 +193,23 @@ public class CreateQuestionDialogBox {
 
     private boolean createQuestion(String questionName, String questionDescription, String questionAnswer)
     {
-        if(questionName.trim().length() < 1)
-        {
-            Toast.makeText(this.context,"Question title too short!",Toast.LENGTH_LONG).show();
-            return false;
-        }
+
         if(questionDescription.trim().length() < 1)
         {
             Toast.makeText(this.context,"Question description too short!",Toast.LENGTH_LONG).show();
             return false;
+        }
+        String questionTitle = questionName;
+        if(questionTitle.trim().length() < 1)
+        {
+            questionTitle = questionDescription.trim();
         }
         if(questionAnswer.trim().length() < 1)
         {
             Toast.makeText(this.context,"Question answer too short!",Toast.LENGTH_LONG).show();
             return false;
         }
-        question question1 = new question(questionName,questionDescription,questionAnswer,this.questionImage);
+        question question1 = new question(questionTitle,questionDescription,questionAnswer,this.questionImage);
 
         question1.setId(db.createQuestion(question1, quizId));
         this.thisQuiz = db.getQuiz(quizId);

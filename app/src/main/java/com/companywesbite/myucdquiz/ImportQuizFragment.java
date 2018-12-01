@@ -33,6 +33,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name: ImportQuizFragment
+ * Functionality: It is the second fragment in the main activity and
+ *                All it does is it asks for permission to access files and allows the user
+ *                to import text files, which if match the apps quiz format, will allow the
+ *                user to import quiz into the sqllite database.
+ *
+ */
+
+
+
+
+
 public class ImportQuizFragment extends Fragment {
     private static final String TAG = "ImportQuizFragment";
 
@@ -78,6 +95,7 @@ public class ImportQuizFragment extends Fragment {
 
     }
 
+    // start the import
     private void importQuiz()
     {
          // just say that the quiz has been imported..

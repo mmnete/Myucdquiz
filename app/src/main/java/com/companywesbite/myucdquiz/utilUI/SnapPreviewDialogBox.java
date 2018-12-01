@@ -10,6 +10,25 @@ import android.widget.TextView;
 
 import com.companywesbite.myucdquiz.R;
 
+
+/***
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-12-01
+ * Name: SnapPreviewDialogBox
+ * Functionality: This is our own custom dialog box that pops up as an input when the user wants to view a
+ *                preview of the question or answer that is obtained from an image taken by the camera
+ *                through the text extraction OCR API in the snapquestionactivity
+ *
+ *
+ *
+ *
+ */
+
+
+
+
 public class SnapPreviewDialogBox {
 
 

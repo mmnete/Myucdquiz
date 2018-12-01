@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
  * Name: AskFragment
  * Functionality: It is the third fragment of the main activity.
  *                It contains a search bar that allows user to ask short "ACADEMIC" questions.
+ *                It uses a webservise and uses the wolfram webiste using their answer API
  *
  */
 

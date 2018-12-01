@@ -20,6 +20,20 @@ import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utilUI.CreateQuestionDialogBox;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name: EditQuiz
+ * Functionality: It is the activity that gets called from the
+ *                quizdetailactivity and it allows the user to edit quiz information
+ *                it saves all the new information into the sqllite database using the database helper object
+ *
+ */
+
+
+
+
 public class EditQuiz extends AppCompatActivity {
 
 

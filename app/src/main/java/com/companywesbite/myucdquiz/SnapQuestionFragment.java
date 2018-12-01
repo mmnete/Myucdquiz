@@ -36,6 +36,23 @@ import java.io.InputStream;
 
 import static android.app.Activity.RESULT_OK;
 
+
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  SnapQuestionFragment
+ * Functionality: This fragment gets called when the user wants to take a picture of the
+ *                answer and uses the OCR to fetch text. The save button saves the question and answer
+ *                from the snapquestionactivity into the database.
+ *
+ *
+ */
+
+
+
 public class SnapQuestionFragment extends Fragment {
 
     private static final String TAG = "SnapNotesFragment";

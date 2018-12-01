@@ -5,6 +5,9 @@ package com.companywesbite.myucdquiz;
  * The class helps in calculating the similarity between two strings
  * i.e the questions answer and the user answer... helps calculate the score..
  *
+ * The error tolerance helps to classify an answer as correct or wrong depending on the level of similarity
+ * between the actual answer and the user provided answer
+ *
  */
 
 

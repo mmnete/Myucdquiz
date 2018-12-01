@@ -4,9 +4,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-/**
- * @author Android Group:
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  SplashScreenActivity
+ * Functionality: Shows splashscreen until app is loaded then starts the mainactivity
+ *
+ *
  */
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override

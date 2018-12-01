@@ -17,6 +17,11 @@ import com.companywesbite.myucdquiz.questionClasses.note;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * No Longer used !!!!
+ * */
+
+
 public class NoteListViewAdapter extends ArrayAdapter<note> {
 
         int groupid;

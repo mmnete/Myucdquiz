@@ -16,6 +16,23 @@ import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 
+
+
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  SnapQuestionActivity
+ * Functionality: This activity contains two fragments snapanswer and snapquestion
+ *                It collects and saves the question text and answer text and saves it to the database.
+ *
+ *
+ *
+ *
+ */
+
 public class SnapQuestionActivity extends AppCompatActivity {
 
 

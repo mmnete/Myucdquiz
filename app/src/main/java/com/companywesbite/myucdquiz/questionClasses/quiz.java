@@ -9,6 +9,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-01
+ * Name: quiz
+ * Functionality: This is a class that is a blue print of what a quiz is.
+ *                A quiz is just a collection of questions.
+ *                It contains all the getters and setters of what a quiz is in our project.
+ *                What should a quiz have?
+ *                A quiz should contain an id, title, description, a map of id and questions
+ *                for fast access to questions, number of questions, error tolerance - this enables
+ *                us to grade questions by knowing how similar an answer provided should be to the true
+ *                answer of all the questions in a particular quiz.
+ *
+ *                The quiz class also contains a method to construct it to and from a json string so
+ *                that we can easily create new objects when a quiz is being shared or imported
+ *
+ */
+
+
+
 public class quiz {
 
     private long id;
@@ -29,6 +51,7 @@ public class quiz {
         this.errorTolerance = errorTolerance;
     }
 
+    // Constructor when the quiz is imported or shared
     public quiz(String jsonString)
     {
         try {
@@ -117,7 +140,7 @@ public class quiz {
         this.errorTolerance = errorTolerance;
     }
 
-    // returns how many questions are correct...
+    // returns the ratio of questions that are correct...
     public double getPercentCorrect()
     {
         double out = 0;
@@ -146,6 +169,8 @@ public class quiz {
         return currQuestions.size()-out;
     }
 
+
+    // used in the import or export of a quiz to share.
     public String toJSON(){
 
         JSONObject jsonObject= new JSONObject();

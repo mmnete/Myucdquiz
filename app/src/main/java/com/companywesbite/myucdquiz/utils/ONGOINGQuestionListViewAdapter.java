@@ -17,9 +17,31 @@ import com.companywesbite.myucdquiz.questionClasses.question;
 import com.companywesbite.myucdquiz.questionClasses.quiz;
 import com.companywesbite.myucdquiz.utilUI.AnswerQuestionDialogBox;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 2018-11-30
+ * Name: ONGOINGQuestionListViewAdapter
+ * Functionality: This is a class is the one responsible for displaying the question list in the
+ *                quizdetailactivity - this is the activity ran when a user click on a specific
+ *                quiz in the first page of the app. It conttrols how each question should be displayed
+ *
+ *                It displays the question title [if present], otherwise it just shows a snippet of the question
+ *                itself, and also shows if a question is answered or not using an awesome image UI
+ *
+ *                It contains a shuffle method that shuffles questions in a quiz - a feature we added
+ *                in our app to enable learners to be able to work with a random order of their questuons
+ *
+ *
+ *
+ */
+
+
+
 
 public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
 
@@ -32,15 +54,17 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
     private  AnswerQuestionDialogBox dialogBox;
     private long quizId;
     private quiz thisQuiz;
+    private DatabaseHelper db;
 
-    public ONGOINGQuestionListViewAdapter(Context context,Activity activity, List<question> arraylist, long quizId) {
+
+    public ONGOINGQuestionListViewAdapter(Context context,Activity activity, List<question> arraylist, quiz thisQuiz, DatabaseHelper db) {
         mContext = context;
         inflater = LayoutInflater.from(mContext);
         this.arraylist = arraylist;
         this.activity = activity;
-        this.quizId = quizId;
-        DatabaseHelper db = new DatabaseHelper(context);
-        thisQuiz = db.getQuiz(this.quizId);
+        this.quizId = thisQuiz.getId();
+        this.db = db;
+        this.thisQuiz = thisQuiz;
     }
 
     public class ViewHolder {
@@ -64,6 +88,10 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         return position;
     }
 
+
+
+    // All the view displaying operations
+    // All the methods that get called when actions are done on list elements like clicking
     public View getView(final int position, View view, ViewGroup parent) {
         final ViewHolder holder;
         if (view == null) {
@@ -103,7 +131,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                DatabaseHelper db = new DatabaseHelper(activity);
+
                                 db.deleteQuestion(arraylist.get(position).getId(),quizId);
                                 dialog.cancel();
                             }
@@ -134,6 +162,7 @@ public class ONGOINGQuestionListViewAdapter extends BaseAdapter {
         // Shuffle the arrayList
         Collections.shuffle(arraylist);
         // Hand it over to a newly created dialog box
+
         dialogBox = new AnswerQuestionDialogBox(arraylist.get(0),arraylist,0,mContext, thisQuiz);
         dialogBox.showDialog(activity);
     }

@@ -12,6 +12,24 @@ import com.companywesbite.myucdquiz.utils.DatabaseHelper;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  QuestionImageViewer
+ * Functionality: This activity was accessed from the answerquestion alert box
+ *                This activity allows the user to view the image associated with a specific question if present
+ *                The activity uses the database object to get the url of the image
+ *                and it uses the subsampling-scale-image API to load UI elements to handle drag and zoom events
+ *
+ *
+ */
+
+
+
+
 public class QuestionImageViewer extends AppCompatActivity {
 
 

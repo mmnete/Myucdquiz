@@ -8,9 +8,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Team 2018.
+/***
+ *
+ *
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name:  SectionsPageAdapter
+ * Functionality: This adapter helps to manage the fragments that show up in the
+ *                mainactivity
+ *
+ *
  */
+
+
 
 public class SectionsPageAdapter extends FragmentPagerAdapter {
 

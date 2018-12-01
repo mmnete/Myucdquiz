@@ -23,6 +23,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
+/***
+ *
+ * Team: Flashcards Pro
+ * Date: 12/09/2018
+ * Name: LoadQuizActivity
+ * Functionality: It is a one time use activity that gets loaded when the user wants to open a txt file from
+ *                email like gmail as a completion for sharing. The activity then creates the quiz and saves
+ *                it in the database.
+ *
+ */
+
+
+
 public class LoadQuizActivity extends AppCompatActivity {
 
 
